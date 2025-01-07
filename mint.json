@@ -45,7 +45,8 @@
         "introduction",
         "announcements",
         "waves-api",
-        "voice-clone",
+        "voice-cloning",
+        "python-sdk",
         "legacy-api-notice"
       ]
     }
