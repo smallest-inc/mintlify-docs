@@ -52,6 +52,7 @@
         "waves-api",
         "voice-cloning",
         "python-sdk",
+        "best_practices_lightning",
         "legacy-api-notice"
       ]
     }
