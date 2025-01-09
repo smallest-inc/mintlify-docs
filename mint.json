@@ -33,6 +33,11 @@
       "url": "https://discord.gg/5evETqguJs"
     },
     {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/smallest-inc"
+    },
+    {
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://smallest.ai/blog"
