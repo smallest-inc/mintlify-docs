@@ -3,7 +3,9 @@ title: "Voice Cloning"
 description: "Best Practices for Recording Reference Audio"
 ---
 
-To achieve the best results when cloning your voice, it's essential to provide high-quality reference audio. Below are some best practices, dos and don'ts, and examples to guide you.
+To achieve the best results when cloning your voice, it's essential to provide high-quality reference audio. Below are some best practices, dos and don'ts, and examples to guide you.   
+
+Ready to Clone Your Voice? Check it out on our platform [waves.smallest.ai](https://waves.smallest.ai/studio/create)    
 
 ---
 
@@ -11,78 +13,111 @@ To achieve the best results when cloning your voice, it's essential to provide h
 
 1. **Environment**  
    - Record in a quiet room with minimal background noise.  
-   - Use a good quality microphone. Avoid phone recordings if possible.  
+   - Use a good quality microphone. While dedicated mics are ideal, MacBook microphones work surprisingly well for this purpose.
 
 2. **Speaking Style**  
    - Speak naturally and avoid excessive emotion unless a specific tone is required.  
-   - Maintain a consistent pace and tone throughout the recording.  
+   - Maintain a consistent pace and tone throughout the recording. Be mindful of long pauses, as they can impact the quality of the cloned voice.
 
 3. **Length of Audio**  
    - Provide at least 5 seconds to 15 seconds of clean audio.  
 
 ---
 
-## ✅ What to Do  
-- Use a microphone with a pop filter to reduce plosive sounds (e.g., "p" and "b" sounds).  
-- Maintain a distance of 6-12 inches from the microphone for clarity.  
-- Record in a single session to ensure consistency.  
+## 🎧 Examples of Good and Bad Reference Audio    
 
-## ❌ What Not to Do  
-- Don’t record in noisy environments like cafes or parks.  
-- Avoid using audio with overlapping voices or loud background sounds.  
-- Don’t read with exaggerated emotion unless it’s intentional for emotional cloning.  
-
----
-
-## 🎧 Examples of Good and Bad Reference Audio  
+> **_NOTE:_** Currently, there is no direct support for adding audio to Mintlify. As a workaround, we have embedded a video to include the necessary audio content. 
 
 ### Good Reference Audio  
-- High-quality, clear, and consistent tone.  
-- **Voice Sample**: [Audio Player Placeholder]  
+- High-quality, clear, and consistent tone.   
+
+<video controls autoplay>
+ <source src="video/good_ref.mp4" type="video/mp4" />
+</video>
+
 
 ### Bad Reference Audio  
 1. **With Background Noise**  
-   - **Voice Sample**: [Audio Player Placeholder]  
+   <video controls autoplay>
+      <source src="video/bg_ref.mp4" type="video/mp4" />
+   </video>  
+
 2. **Inconsistent Speaking Style**  
-   - **Voice Sample**: [Audio Player Placeholder]  
+   <video controls autoplay>
+      <source src="video/inconsistent_ref.mp4" type="video/mp4" />
+   </video> 
+
 3. **Overlapping Voices**  
-   - **Voice Sample**: [Audio Player Placeholder]  
+   <video controls autoplay>
+      <source src="video/overlap_ref.mp4" type="video/mp4" />
+   </video>   
 
 ---
 
-## 🔧 Solving Common Problems
+# 🎭 Creating Expressive Voice Clones
 
-### Problem: My cloned voice sounds inconsistent.  
-**Solution:** Ensure that your reference audio is clean and recorded in a single, uninterrupted session.
+Our platform supports emotional reference audio, meaning the emotions, pitch or tone in the reference audio will influence the output. This is ideal for creating expressive clones that match your intended tone.
 
-### Problem: My cloned voice sounds robotic or unnatural.  
-**Solution:** Speak naturally and avoid reading mechanically. Providing expressive, clear audio helps the model learn your unique vocal characteristics.  
+## 😄 Emotional Control  
+- The emotions in the reference audio (e.g., angry, happy, sad) directly impact the tone of the generated voice.
+- For example, if the reference audio conveys happiness, the output will replicate that cheerful tone.
 
----
+## ⚡ Speed Control
+- The pace of your reference audio determines the speed of the output.
+- A fast-paced reference will generate a similarly fast delivery, while a slower reference will produce a more measured response.
 
-# Emotional Reference Audio
-
-Our platform supports emotional reference audio, meaning the emotions or tone in the reference audio will influence the output. This is ideal for creating expressive clones that match your intended tone.
-
-## 🎭 How It Works  
-- The tone of the reference audio (e.g., angry, happy, sad) directly impacts the generated voice output.  
-- If you provide a **fast-paced** reference, the output will also be fast-paced. Similarly, if the input is **angry**, the output will sound angry.
+## 🔊 Loudness Control
+- The loudness or volume in your reference audio is reflected in the output.
+- For instance, a soft-spoken input will result in a quieter clone, while a louder, more energetic recording will produce a bolder output.
 
 ---
 
 ## 🎧 Emotional Reference Audio Examples  
 
 ### Angry Tone  
-- **Reference Audio Sample**: [Audio Player Placeholder]  
-- **Output Audio Example**: [Audio Player Placeholder]  
+- **Reference Audio Sample**:   
+   <video controls autoplay>
+      <source src="video/angry_ref.mp4" type="video/mp4" />
+   </video>   
 
-### Happy Tone  
-- **Reference Audio Sample**: [Audio Player Placeholder]  
-- **Output Audio Example**: [Audio Player Placeholder]  
+- **Output Audio Example**: 
+   <video controls autoplay>
+      <source src="video/angry_gen.mp4" type="video/mp4" />
+   </video> 
+
+### Silent Tone  
+- **Reference Audio Sample**:  
+   <video controls autoplay>
+      <source src="video/whisper_ref.mp4" type="video/mp4" />
+   </video>   
+
+- **Output Audio Example**:   
+   <video controls autoplay>
+      <source src="video/whisper_gen.mp4" type="video/mp4" />
+   </video>   
+
 
 ### Fast-Paced Tone  
-- **Reference Audio Sample**: [Audio Player Placeholder]  
-- **Output Audio Example**: [Audio Player Placeholder]  
+- **Reference Audio Sample**:   
+   <video controls autoplay>
+      <source src="video/fast_ref.mp4" type="video/mp4" />
+   </video>   
+
+- **Output Audio Example**:   
+   <video controls autoplay>
+      <source src="video/fast_gen.mp4" type="video/mp4" />
+   </video>   
+
+
+---
+
+## 🔧 Common Problems
+
+### Problem 1: My cloned voice sounds inconsistent.  
+**Solution:** Ensure that your reference audio is clean and recorded in a single, uninterrupted session.
+
+### Problem 2: My cloned voice sounds robotic or unnatural.  
+**Solution:** Speak naturally and avoid reading mechanically. Providing expressive, clear audio helps the model learn your unique vocal characteristics.  
 
 ---
 
