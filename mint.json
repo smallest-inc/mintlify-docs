@@ -19,7 +19,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:info@smallest.ai"
+      "url": "mailto:support@smallest.ai"
     }
   ],
   "topbarCtaButton": {
@@ -31,6 +31,11 @@
       "name": "Community",
       "icon": "discord",
       "url": "https://discord.gg/5evETqguJs"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/smallest-inc"
     },
     {
       "name": "Blog",
@@ -45,6 +50,8 @@
         "introduction",
         "announcements",
         "waves-api",
+        "voice-cloning",
+        "python-sdk",
         "best_practices_lightning",
         "legacy-api-notice"
       ]

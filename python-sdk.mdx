@@ -1,0 +1,246 @@
+---
+title: "Python SDK"
+---
+
+Smallest AI builds high-speed multi-lingual voice models tailored for real-time applications, achieving ultra-realistic audio generation in as fast as ~100 milliseconds for 10 seconds of audio. With this SDK, you can easily convert text into high-quality audio with humanlike expressiveness.
+ 
+Currently, the library supports direct synthesis and the ability to synthesize streamed LLM output, both synchronously and asynchronously.    
+
+You can access the source code for the Python SDK on our [GitHub repository](https://github.com/smallest-inc/smallest-python-sdk).
+
+---
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Get the API Key](#get-the-api-key)
+- [Best Practices for Input Text](#best-practices-for-input-text)
+- [Examples](#examples)
+  - [Sync](#sync)
+  - [Async](#async)
+  - [LLM to Speech](#llm-to-speech)
+- [Available Methods](#available-methods)
+- [Technical Note: WAV Headers in Streaming Audio](#technical-note-wav-headers-in-streaming-audio)
+
+---
+
+## Installation
+
+To install the latest version available:  
+```bash
+pip install smallestai
+```  
+
+When using an SDK in your application, make sure to pin to at least the major version (e.g., `==1.*`). This ensures your application remains stable and avoids potential issues from breaking changes in future updates.
+
+---
+
+## Get the API Key
+
+1. Visit [waves.smallest.ai](https://waves.smallest.ai/) and sign up or log in.  
+2. Navigate to the `API Key` tab in your account dashboard.  
+3. Create a new API Key and copy it.  
+4. Export the API Key in your environment with the name `SMALLEST_API_KEY` to allow secure access for authentication.  
+
+---
+
+## Best Practices for Input Text
+
+For optimal voice generation results:
+
+1. For **English**, provide the input in Latin script (e.g., "Hello, how are you?").
+2. For **Hindi**, provide the input in Devanagari script (e.g., "नमस्ते, आप कैसे हैं?").
+3. For **code-mixed input**, use Latin script for English and Devanagari script for Hindi (e.g., "Hello, आप कैसे हैं?").
+
+> **Note:** The `transliterate` parameter is not fully supported and may not perform consistently. It is recommended to avoid relying on this parameter.
+
+---
+
+## Examples
+
+### Sync
+Synchronous text-to-speech synthesis client.  
+
+**Basic Usage:**  
+```python
+from smallest import Smallest
+
+def main():
+    client = Smallest(api_key="SMALLEST_API_KEY")
+    client.synthesize("Hello, this is a test for sync synthesis function.", save_as="sync_synthesize.wav")
+
+if __name__ == "__main__":
+    main()
+```  
+
+#### Parameters:
+
+- **api_key**: Your API key (can be set via SMALLEST_API_KEY environment variable)
+- **model**: TTS model to use (default: "lightning")
+- **sample_rate**: Audio sample rate (default: 24000)
+- **voice**: Voice ID (default: "emily")
+- **speed**: Speech speed multiplier (default: 1.0)
+- **add_wav_header**: Include WAV header in output (default: True)
+- **transliterate**: Enable text transliteration (default: False)
+- **remove_extra_silence**: Remove additional silence (default: True)   
+
+These parameters are part of the Smallest instance. They can be set when creating the instance (as shown above). However, the synthesize function also accepts kwargs, allowing you to override any of these parameters on a per-request basis.   
+
+For example, you can modify the speech speed and sample rate just for a particular synthesis request:      
+
+**Override Parameters Example:**  
+```python
+client.synthesize(
+    "Hello, this is a test for sync synthesis function.",
+    save_as="sync_synthesize.wav",
+    speed=1.5,  # Overrides default speed
+    sample_rate=16000  # Overrides default sample rate
+)
+```
+
+---
+
+### Async
+Asynchronous text-to-speech synthesis client.  
+
+**Basic Usage:**  
+```python
+import asyncio
+import aiofiles
+from smallest import AsyncSmallest
+
+client = AsyncSmallest(api_key="SMALLEST_API_KEY")
+
+async def main():
+    async with client as tts:
+        audio_bytes = await tts.synthesize("Hello, this is a test of the async synthesis function.") 
+        async with aiofiles.open("async_synthesize.wav", "wb") as f:
+            await f.write(audio_bytes) # alternatively you can use the `save_as` parameter.
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+#### Parameters:
+
+- **api_key**: Your API key (can be set via SMALLEST_API_KEY environment variable)
+- **model**: TTS model to use (default: "lightning")
+- **sample_rate**: Audio sample rate (default: 24000)
+- **voice**: Voice ID (default: "emily")
+- **speed**: Speech speed multiplier (default: 1.0)
+- **add_wav_header**: Include WAV header in output (default: True)
+- **transliterate**: Enable text transliteration (default: False)
+- **remove_extra_silence**: Remove additional silence (default: True)   
+
+These parameters are part of the AsyncSmallest instance. They can be set when creating the instance (as shown above). However, the synthesize function also accepts kwargs, allowing you to override any of these parameters on a per-request basis.   
+
+For example, you can modify the speech speed and sample rate just for a particular synthesis request:     
+
+**Override Parameters Example:**  
+```python
+audio_bytes = await tts.synthesize(
+    "Hello, this is a test of the async synthesis function.",
+    speed=1.5,  # Overrides default speed
+    sample_rate=16000  # Overrides default sample rate
+)
+```
+
+---
+
+### LLM to Speech
+
+The `TextToAudioStream` class provides real-time text-to-speech processing, converting streaming text into audio output. It’s useful for applications like voice assistants, live captioning, or chatbots that require immediate audio feedback.
+
+```python
+import wave
+import asyncio
+from groq import Groq
+from smallest import Smallest
+from smallest import TextToAudioStream
+
+llm = Groq(api_key=os.environ.get"GROQ_API_KEY")
+tts = Smallest(api_key="SMALLEST_API_KEY")
+
+async def generate_text(prompt):
+    """Async generator for streaming text from Groq. You can use any LLM"""
+    completion = llm.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="llama3-8b-8192",
+        stream=True,
+    )
+
+    for chunk in completion:
+        text = chunk.choices[0].delta.content
+        if text is not None:
+            yield text
+
+async def save_audio_to_wav(file_path, processor, llm_output):
+    with wave.open(file_path, "wb") as wav_file:
+        wav_file.setnchannels(1)
+        wav_file.setsampwidth(2) 
+        wav_file.setframerate(24000)
+        
+        async for audio_chunk in processor.process(llm_output):
+            wav_file.writeframes(audio_chunk)
+
+async def main():
+    # Initialize the TTS processor with the TTS instance
+    processor = TextToAudioStream(tts_instance=tts)
+    
+    # Generate text asynchronously and process it
+    llm_output = generate_text("Explain text to speech like I am five in 5 sentences.")
+    
+    # As an example, save the generated audio to a WAV file.
+    await save_audio_to_wav("llm_to_speech.wav", processor, llm_output)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+#### Parameters:
+
+**tts_instance**: Text-to-speech engine (Smallest or AsyncSmallest)  
+**queue_timeout**: Wait time for new text (seconds, default: 5.0)  
+**max_retries**: Number of retry attempts for failed synthesis (default: 3)    
+
+
+#### Output Format:
+The processor yields raw audio data chunks without WAV headers for streaming efficiency. These chunks can be:  
+
+1. Played directly through an audio device,
+2. Saved to a file.
+3. Streamed over a network.
+4. Further processed as needed.
+
+---
+
+## Available Methods
+
+```python
+from smallest import Smallest
+
+client = Smallest(api_key="SMALLEST_API_KEY")
+
+print(f"Available Languages: {client.get_languages()}")
+print(f"Available Voices: {client.get_voices()}")
+print(f"Available Models: {client.get_models()}")
+```
+
+---
+
+## Technical Note: WAV Headers in Streaming Audio
+
+When streaming audio, WAV headers are excluded from individual chunks for efficiency. Reasons include:
+
+- Headers contain metadata for the entire audio file, which isn’t suitable for streaming chunks.
+- Including headers may cause playback artifacts when concatenating chunks.  
+
+### Best Practices for Audio Streaming
+
+1. Stream raw PCM audio data without headers.
+2. Add a WAV header only when saving the complete audio stream or initializing playback.
