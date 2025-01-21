@@ -37,34 +37,13 @@ paths:
               type: object
               properties:
                 voice_id:
-                  type: string
-                  description: Voice IDS you can use with this API
-                  enum:
-                    - emily
-                    - jasmine
-                    - arman
-                    - james
-                    - mithali
-                    - aravind
-                    - raj
-                    - diya
-                    - raman
-                    - ananya
-                    - isha
-                    - william
-                    - aarav
-                    - monika
-                    - niharika
-                    - deepika
-                    - raghav
-                    - kajal
-                    - radhika
-                    - mansi
-                    - nisha
-                    - saurabh
-                    - pooja
-                    - saina
-                    - sanya
+                  oneOf:
+                    - type: string
+                      enum: ['arman', 'diya', 'raman', 'ananya', 'aarav', 'shrishti', 'niharika', 'deepika', 'raghav', 'kajal', 'mansi', 'nisha', 'saurabh', 'pooja', 'saina', 'sanya', 'aravind', 'mithali', 'raj', 'james', 'jasmine', 'emily', 'arnav', 'george', 'chetan', 'ankur', 'enola', 'judi', 'rebecca', 'abhinav', 'sushma', 'ashish', 'shweta', 'karen']
+                      description: Voice ID for the 'lightning' model
+                    - type: string
+                      enum: ['blofeld', 'chirag', 'luther', 'julia', 'erica', 'nyah', 'william', 'aditi', 'felix', 'angela', 'radhika', 'zorin', 'alec', 'solomon', 'yash', 'chinmay', 'karan', 'benji', 'arnold', 'ginny', 'ilsa', 'bellatrix', 'lucius', 'nikita', 'roma', 'kartik', 'gargi', 'albus', 'lakshya', 'irisha', 'dhruv', 'bogambo']
+                      description: Voice ID for the 'lightning-large' model
                 text:
                   type: string
                   description: The text to be synthesized into speech
