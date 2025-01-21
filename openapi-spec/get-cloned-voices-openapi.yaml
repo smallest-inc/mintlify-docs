@@ -1,0 +1,170 @@
+openapi: 3.0.1
+info:
+  title: Get Voices
+  description: |
+    API Endpoint to get your cloned voices.
+    Currently featuring our voice cloning model, Lightning Large.
+  version: 1.0.0
+servers:
+  - url: https://waves-api.smallest.ai
+    description: Waves API server
+
+paths:
+  /api/v1/{model}/get_cloned_voices:
+    get:
+      summary: Get Voices
+      description: Fetch your cloned voices.
+      operationId: getWavesVoices
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: string
+            enum: [lightning-large]
+          description: The model to use for speech synthesis.
+      responses:
+        '200':
+          description: Voices retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voices:
+                    type: array
+                    description: List of available voices.
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: Unique identifier for the voice document.
+                          example: "678e0619de0d36b417019ac2"
+                        voiceId:
+                          type: string
+                          description: Unique identifier for the voice.
+                          example: "voice_gd48BlQqzT"
+                        accent:
+                          type: string
+                          description: Accent of the voice.
+                          example: "general"
+                        tags:
+                          type: array
+                          description: Tags associated with the voice.
+                          items:
+                            type: string
+                            example: "casual"
+                        status:
+                          type: string
+                          description: Status of the voice.
+                          example: "completed"
+                        audioFileNames:
+                          type: array
+                          description: List of audio file names associated with the voice.
+                          items:
+                            type: string
+                            example: "reference_audio.wav"
+                        model:
+                          type: object
+                          description: Model information for the voice.
+                          properties:
+                            _id:
+                              type: string
+                              description: Unique identifier for the model.
+                              example: "676bb4632b500895590edf6d"
+                            modelName:
+                              type: string
+                              description: Name of the model.
+                              example: "lightning-large"
+                            __v:
+                              type: integer
+                              description: Versioning number for the model document.
+                              example: 3
+                            pricePerMinute:
+                              type: number
+                              format: float
+                              description: Price per minute of usage for the model.
+                              example: 0.03
+                            displayName:
+                              type: string
+                              description: Display name of the model.
+                              example: "Lightning Large"
+                            description:
+                              type: string
+                              description: Description of the model.
+                              example: "Superior voice cloning. Supports English and Hindi."
+                            hasVoiceClone:
+                              type: boolean
+                              description: Whether the model supports voice cloning.
+                              example: true
+                            beta:
+                              type: boolean
+                              description: Whether the model is in beta.
+                              example: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: The time when the voice was created.
+                          example: "2025-01-20T08:15:21.934Z"
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: The last update time for the voice.
+                          example: "2025-01-20T08:15:53.308Z"
+                        __v:
+                          type: integer
+                          description: Versioning number for the voice document.
+                          example: 0
+                        displayName:
+                          type: string
+                          description: Display name of the voice.
+                          example: "cloned voice"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error occurred
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -3,7 +3,7 @@ info:
   title: Waves API
   description: |
     API for the new Waves text-to-speech model.
-    Currently featuring our first model, Lightning, with more models coming soon.
+    Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
   version: 1.0.0
 servers:
   - url: https://waves-api.smallest.ai
@@ -22,13 +22,7 @@ paths:
           schema:
             type: string
             enum: [lightning, lightning-large]
-          description: The model to use for speech synthesis. Currently, only 'lightning' is available.
-        - in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-          description: Bearer token for authentication. Format is 'Bearer {token}'
+          description: The model to use for speech synthesis.
       requestBody:
         required: true
         content:
@@ -37,16 +31,11 @@ paths:
               type: object
               properties:
                 voice_id:
-                  oneOf:
-                    - type: string
-                      enum: ['arman', 'diya', 'raman', 'ananya', 'aarav', 'shrishti', 'niharika', 'deepika', 'raghav', 'kajal', 'mansi', 'nisha', 'saurabh', 'pooja', 'saina', 'sanya', 'aravind', 'mithali', 'raj', 'james', 'jasmine', 'emily', 'arnav', 'george', 'chetan', 'ankur', 'enola', 'judi', 'rebecca', 'abhinav', 'sushma', 'ashish', 'shweta', 'karen']
-                      description: Voice ID for the 'lightning' model
-                    - type: string
-                      enum: ['blofeld', 'chirag', 'luther', 'julia', 'erica', 'nyah', 'william', 'aditi', 'felix', 'angela', 'radhika', 'zorin', 'alec', 'solomon', 'yash', 'chinmay', 'karan', 'benji', 'arnold', 'ginny', 'ilsa', 'bellatrix', 'lucius', 'nikita', 'roma', 'kartik', 'gargi', 'albus', 'lakshya', 'irisha', 'dhruv', 'bogambo']
-                      description: Voice ID for the 'lightning-large' model
+                  type: string
+                  description: Voice ID for the model.
                 text:
                   type: string
-                  description: The text to be synthesized into speech
+                  description: The text to be synthesized into speech.
                 speed:
                   type: number
                   minimum: 0.5
@@ -67,7 +56,7 @@ paths:
                 - text
       responses:
         '200':
-          description: Synthesized speech retrieved successfully
+          description: Synthesized speech retrieved successfully.
           content:
             audio/wav:
               schema:

@@ -1,0 +1,104 @@
+openapi: 3.0.1
+info:
+  title: Waves API
+  description: |
+    API for the new Waves text-to-speech model.
+    Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
+  version: 1.0.0
+servers:
+  - url: https://waves-api.smallest.ai
+    description: Waves API server
+
+paths:
+  /api/v1/{model}/add_voice:
+    post:
+      summary: Add a new voice to the model
+      description: Instantly clone a voice by uploading an audio file for the specified model.
+      operationId: addVoiceToModel
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: string
+            enum: [lightning-large]
+          description: The model to which the voice should be added.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The audio file (.wav) containing the voice to be cloned.
+                displayName:
+                  type: string
+                  description: The display name for the cloned voice.
+              required:
+                - file
+                - displayName
+      responses:
+        '201':
+          description: Voice successfully added to the model.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voice_id:
+                    type: string
+                    description: The unique ID of the newly added voice.
+                  message:
+                    type: string
+                    description: Success message.
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error occurred
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

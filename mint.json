@@ -41,70 +41,73 @@
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-references"
+      "url": "content/api-references"
     },
     {
       "name": "Client Libraries",
-      "url": "client-libraries"
+      "url": "content/client-libraries"
     },
     {
       "name": "Changelog",
-      "url": "changelog"
+      "url": "content/changelog"
     }
   ],
   "navigation": [
     {
       "group": "Getting Started",
       "pages": [
-        "quickstart",
-        "models"
+        "content/getting-started/quickstart",
+        "content/getting-started/models"
       ]
     },
     {
       "group": "Text to Speech",
       "pages": [
-        "how-to-tts",
-        "llm-to-tts"
+        "content/text-to-speech/how-to-tts",
+        "content/text-to-speech/llm-to-tts"
       ]
     },
     {
       "group": "Voice Cloning",
       "pages": [
-        "how-to-vc",
-        "get-all-clones"
+        "content/voice-cloning/how-to-vc",
+        "content/voice-cloning/get-all-clones"
       ]
     },
     {
       "group": "Integrations",
       "pages": [
-        "livekit",
-        "plivo-vonage",
-        "vocode"
+        "content/integrations/livekit",
+        "content/integrations/plivo",
+        "content/integrations/vonage"
       ]
     },
     {
       "group": "Best Practices",
       "pages": [
-        "vc-best-practices",
-        "tts-best-practices"
+        "content/best-practices/vc-best-practices",
+        "content/best-practices/tts-best-practices"
       ]
     },
     {
       "group": "API References",
       "pages": [
-        "api-references/waves-api"
+        "content/api-references/waves-api",
+        "content/api-references/get-voices-api",
+        "content/api-references/get-cloned-voices-api",
+        "content/api-references/add-voice-api"
       ]
     },
     {
       "group": "Client Libraries",
       "pages": [
-        "client-libraries/overview"
+        "content/client-libraries/overview"
       ]
     },
     {
       "group": "Changelog",
       "pages": [
-        "changelog/announcements"
+        "content/changelog/announcements"
       ]
     }
   ],
@@ -112,5 +115,5 @@
     "twitter": "https://twitter.com/smallest_AI",
     "linkedin": "https://www.linkedin.com/company/smallest"
   },
-  "openapi": ["/openapi.yaml", "/waves-openapi.yaml"]
+  "openapi": ["openapi-spec/openapi.yaml", "openapi-spec/waves-openapi.yaml", "openapi-spec/get-voices-openapi.yaml", "openapi-spec/get-cloned-voices-openapi.yaml"]
 }
