@@ -1,6 +1,7 @@
 ---
-title: 'Text Formatting Best Practices'
-description: 'This comprehensive guide outlines the recommended practices for formatting text to ensure optimal processing, accuracy, and consistent output across different use cases. Following these guidelines will help improve the quality of generated audio and reduce potential errors.'
+title: "Text to Speech - Best Practices"
+description: "This comprehensive guide outlines the recommended practices for formatting text to ensure optimal processing, accuracy, and consistent output across different use cases. Following these guidelines will help improve the quality of generated audio and reduce potential errors."
+icon: "comment-dots"
 ---
 
 # Text Elements
@@ -88,7 +89,7 @@ def chunk_text(text, max_chunk_size=250):
             
         # Look for punctuation within the last 50 characters of the max chunk size
         chunk_end = max_chunk_size
-        punctuation_marks = '.!?;:'
+        punctuation_marks = '.,:;।!?'
         
         # Search backward from max_chunk_size for punctuation
         found_punct = False

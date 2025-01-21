@@ -1,0 +1,78 @@
+---
+title: "How to create a Voice"
+description: "Generate speech from audio files with the Lightning Large model via the new Waves API"
+openapi: "POST /api/v1/lightning-large/create"
+hideApiMarker: true
+icon: "compact-disc"
+---
+
+The **Waves API - Lightning Large** model is an advanced version of our text-to-speech engine, optimized for high-quality synthesis of natural-sounding speech. This API allows you to upload audio files and generate custom speech outputs, with enhanced capabilities for professional-grade applications.
+
+To get started with the Waves API, you need an API key/Bearer token. You can obtain this by logging into the [Waves](https://waves.smallest.ai) platform and selecting `API key` from the left panel.
+
+## API Endpoint
+
+### **Create Speech from Audio**
+
+The following endpoint allows you to generate speech from a given audio file using the Lightning Large model:
+
+```
+POST https://waves-api.smallest.ai/api/v1/lightning-large/create
+```
+
+### **Request Parameters**
+
+- **Authorization**: You need to include a Bearer token in the `Authorization` header.
+  
+- **File**: Upload your audio file using the `file` parameter. The file should be in WAV format.
+  
+- **displayName**: Provide a custom name for the generated audio output, such as a label or identifier for the request.
+
+### **Example cURL Request**
+
+Here is an example of how to use this API endpoint:
+
+```bash
+curl --location 'https://dev-waves-api.smallest.ai/api/v1/lightning-large/create' \
+--header 'Authorization: Bearer YOUR_BEARER_TOKEN' \
+--form 'file=@"/path/to/your/file.wav"' \
+--form 'displayName="custom_audio_output"'
+```
+
+### **Parameters**
+
+- **Authorization (header)**:  
+  - **Description**: Your Bearer token required for authentication.  
+  - **Example**: `'Authorization: Bearer YOUR_BEARER_TOKEN'`.
+
+- **file (form)**:  
+  - **Description**: The WAV file that will be used as input for speech generation.  
+  - **Example**: `'file=@"/path/to/your/file.wav"'`.
+
+- **displayName (form)**:  
+  - **Description**: A user-friendly name for the generated audio output.  
+  - **Example**: `'displayName="custom_audio_output"'`.
+
+### **Response**
+
+The API will return a success message along with the generated speech file (or a link to it), depending on the implementation. You can use the response to retrieve or further process the generated speech.
+
+---
+
+## Models
+
+The **Lightning Large** model is designed for high-quality synthesis and is ideal for applications requiring more advanced speech generation capabilities. The model is especially suited for use cases like voiceovers, high-fidelity content creation, and more.
+
+For more information on model options and the latest updates, check our [announcements](/announcements) page.
+
+## FAQ
+
+- **What types of audio files are supported?**  
+  The API currently accepts **WAV** files for input.
+
+- **How can I obtain my Bearer token?**  
+  To get your Bearer token, log into the [Waves platform](https://waves.smallest.ai), and click on the "API key" option in the left panel.
+
+- **How can I contact support?**  
+  If you have any questions or issues, please reach out to our support team at [support@smallest.ai](mailto:support@smallest.ai).
+

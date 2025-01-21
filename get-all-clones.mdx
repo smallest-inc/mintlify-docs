@@ -1,0 +1,61 @@
+---
+title: "Get all the cloned preset Voices"
+description: "Retrieve clones of your voice using Lightning Large model from the Waves API"
+openapi: "GET /api/v1/lightning-large/clones"
+hideApiMarker: true
+icon: "users"
+---
+
+The **Waves API - Clones** endpoint allows you to retrieve clones of a specific Lightning Large model. This feature is helpful if you need to manage and interact with different clones of the same model for various applications, such as A/B testing, versioning, or scaling your model deployments.
+
+To get started, you need an API key/Bearer token. You can obtain your token by logging into the [Waves](https://waves.smallest.ai) platform and selecting `API key` from the left panel.
+
+## API Endpoint
+
+### **Retrieve Clones of the Lightning Large Model**
+
+The following endpoint allows you to retrieve clones of the Lightning Large model:
+
+```
+GET https://waves-api.smallest.ai/api/v1/lightning-large/clones
+```
+
+### **Request Parameters**
+
+- **Authorization**: Include a Bearer token in the `Authorization` header to authenticate the request.
+  
+- **Content-Type**: Specify the content type as `application/json` in the header.
+
+### **Example cURL Request**
+
+Here is an example of how to use this API endpoint to retrieve clones:
+
+```bash
+curl --location --request GET 'https://waves-api.smallest.ai/api/v1/lightning-large/clones' \
+--header 'Authorization: Bearer YOUR_BEARER_TOKEN' \
+--header 'Content-Type: application/json'
+```
+
+### **Response**
+
+The API will return a list of the clones for the specified Lightning Large model, which includes relevant metadata for each clone. The response may contain details such as:
+
+- Clone name or ID
+- Model version
+- Status of the clone
+- Creation date
+- Additional metadata or configuration details
+
+---
+
+## FAQ
+
+- **What is a "clone" in this context?**  
+  A clone refers to an identical copy or your audio, which can be used for synthesis.
+
+- **How do I obtain my Bearer token?**  
+  To get your Bearer token, log into the [Waves platform](https://waves.smallest.ai), and click on "API key" in the left panel.
+
+- **What if I need help?**  
+  If you have any questions or issues, please reach out to our support team at [support@smallest.ai](mailto:support@smallest.ai).
+

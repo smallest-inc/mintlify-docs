@@ -16,43 +16,95 @@
     }
   },
   "theme": "prism",
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "mailto:support@smallest.ai"
-    }
-  ],
   "topbarCtaButton": {
     "name": "Home",
     "url": "https://waves.smallest.ai"
   },
-  "anchors": [
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@smallest.ai"
+    },
     {
       "name": "Community",
-      "icon": "discord",
       "url": "https://discord.gg/5evETqguJs"
     },
     {
       "name": "GitHub",
-      "icon": "github",
       "url": "https://github.com/smallest-inc"
     },
     {
       "name": "Blog",
-      "icon": "newspaper",
       "url": "https://smallest.ai/blog"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-references"
+    },
+    {
+      "name": "Client Libraries",
+      "url": "client-libraries"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "navigation": [
     {
-      "group": "Documentation",
+      "group": "Getting Started",
       "pages": [
-        "introduction",
-        "announcements",
-        "waves-api",
-        "voice-cloning",
-        "python-sdk",
-        "best_practices_lightning"
+        "quickstart",
+        "models"
+      ]
+    },
+    {
+      "group": "Text to Speech",
+      "pages": [
+        "how-to-tts",
+        "llm-to-tts"
+      ]
+    },
+    {
+      "group": "Voice Cloning",
+      "pages": [
+        "how-to-vc",
+        "get-all-clones"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "livekit",
+        "plivo-vonage",
+        "vocode"
+      ]
+    },
+    {
+      "group": "Best Practices",
+      "pages": [
+        "vc-best-practices",
+        "tts-best-practices"
+      ]
+    },
+    {
+      "group": "API References",
+      "pages": [
+        "api-references/waves-api"
+      ]
+    },
+    {
+      "group": "Client Libraries",
+      "pages": [
+        "client-libraries/overview"
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog/announcements"
       ]
     }
   ],
