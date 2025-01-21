@@ -1,9 +1,10 @@
 ---
-title: 'Text Formatting Best Practices'
-description: 'This comprehensive guide outlines the recommended practices for formatting text to ensure optimal processing, accuracy, and consistent output across different use cases. Following these guidelines will help improve the quality of generated audio and reduce potential errors.'
+title: "Text to Speech - Best Practices"
+description: "Learn best practices for text formatting for optimal Audio Generation."
+icon: "comment-dots"
 ---
 
-# Text Elements
+This comprehensive guide outlines the recommended practices for formatting text to ensure optimal processing, accuracy, and consistent output across different use cases. Following these guidelines will help improve the quality of generated audio and reduce potential errors.
 
 ## Language and Script Guidelines
 
@@ -68,7 +69,8 @@ To optimize real-time processing and reduce latency, implement these chunking pr
 
 Use the following Python code for implementing text chunking:
 
-```python
+<CodeGroup>
+```python python
 def chunk_text(text, max_chunk_size=250):
     """
     Chunks text with a maximum size of 250 characters, preferring to break at punctuation marks.
@@ -88,7 +90,7 @@ def chunk_text(text, max_chunk_size=250):
             
         # Look for punctuation within the last 50 characters of the max chunk size
         chunk_end = max_chunk_size
-        punctuation_marks = '.!?;:'
+        punctuation_marks = '.,:;।!?'
         
         # Search backward from max_chunk_size for punctuation
         found_punct = False
@@ -114,6 +116,7 @@ def chunk_text(text, max_chunk_size=250):
     
     return chunks
 ```
+</CodeGroup>
 
 ## Handling numbers
 

@@ -1,0 +1,112 @@
+openapi: 3.0.1
+info:
+  title: Waves API
+  description: |
+    API for the new Waves text-to-speech model.
+    Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
+  version: 1.0.0
+servers:
+  - url: https://waves-api.smallest.ai
+    description: Waves API server
+
+paths:
+  /api/v1/{model}/add_voice:
+    post:
+      summary: Add a new voice to the model
+      description: Instantly clone a voice by uploading an audio file for the specified model.
+      operationId: addVoiceToModel
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: model
+          required: true
+          schema:
+            type: string
+            enum: [lightning-large]
+          description: The model to which the voice should be added.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                  description: Display name for the voice clone
+                file:
+                  type: string
+                  format: binary
+                  description: Audio file to create voice clone from
+              required:
+                - displayName
+                - file
+      responses:
+        '200':
+          description: Voice clone created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Voice clone created successfully
+                  data:
+                    type: object
+                    properties:
+                      voiceId:
+                        type: string
+                        example: voice_XfFIkALD7q
+                      model:
+                        type: object
+                        properties:
+                          _doc:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                              modelName:
+                                type: string
+                                example: lightning-large
+                              voiceIds:
+                                type: array
+                                items:
+                                  type: string
+                              pricePerMinute:
+                                type: number
+                                example: 0.03
+                              displayName:
+                                type: string
+                                example: Lightning Large
+                              description:
+                                type: string
+                                example: Superior voice cloning. Supports english and hindi.
+                              hasVoiceClone:
+                                type: boolean
+                                example: true
+                              beta:
+                                type: boolean
+                                example: true
+                      status:
+                        type: string
+                        example: processing
+        '400':
+          description: Bad request or limit exceeded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: clone limit exceeded, consider upgrading
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication

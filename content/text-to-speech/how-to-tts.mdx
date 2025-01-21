@@ -1,0 +1,106 @@
+---
+title: "How to use Text to Speech"
+description: "Learn how to synthesize your text using the Smallest AI API."
+icon: "wave-square"
+---
+
+In this tutorial, you will learn how to use the Smallest AI platform to synthesize text to speech both synchronously and asynchronously. By the end of this tutorial, you will be able to convert text into speech using our API.  
+
+You can access the source code for the Python SDK on our [GitHub repository](https://github.com/smallest-inc/smallest-python-sdk).  
+
+## Requirements
+
+Before you begin, ensure you have the following:
+
+- Python (3.9 or higher) installed on your machine.
+- An API key from the Smallest AI platform (sign up [here](https://waves.smallest.ai)).  
+
+## Setup  
+
+### Install our SDK
+```bash
+pip install smallestai
+``` 
+
+### Set your API key as an environment variable
+```bash
+export SMALLEST_API_KEY=YOUR_API_KEY
+```  
+
+## Synchronous Text to Speech
+
+Here is an example of how to synthesize text to speech synchronously:
+<CodeGroup>
+```python python
+from smallest import Smallest
+
+def main():
+    client = Smallest(api_key="SMALLEST_API_KEY")
+    client.synthesize(
+        "Hello, this is a test for sync synthesis function.",
+        save_as="sync_synthesize.wav"
+    )
+
+if __name__ == "__main__":
+    main()
+```
+</CodeGroup>  
+
+## Asynchronous Text to Speech
+
+Here is an example of how to synthesize text to speech asynchronously:
+<CodeGroup>
+```python python
+import asyncio
+import aiofiles
+from smallest import AsyncSmallest
+
+client = AsyncSmallest(api_key="SMALLEST_API_KEY")
+
+async def main():
+    async with client as tts:
+        audio_bytes = await tts.synthesize("Hello, this is a test of the async synthesis function.") 
+        async with aiofiles.open("async_synthesize.wav", "wb") as f:
+            await f.write(audio_bytes) # alternatively you can use the `save_as` parameter.
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+</CodeGroup>
+
+## Parameters   
+
+- `api_key`: Your API key (can be set via SMALLEST_API_KEY environment variable)
+- `model`: TTS model to use (default: "lightning")
+- `sample_rate`: Audio sample rate (default: 24000)
+- `voice`: Voice ID (default: "emily")
+- `speed`: Speech speed multiplier (default: 1.0)
+- `add_wav_header`: Include WAV header in output (default: True)
+- `transliterate`: Enable text transliteration (default: False)
+- `remove_extra_silence`: Remove additional silence (default: True)   
+
+These parameters are part of the `Smallest` and `AsyncSmallest` instance. They can be set when creating the instance (as shown above). However, the `synthesize` function also accepts `kwargs`, allowing you to override any of these parameters on a per-request basis.  
+
+For example, you can modify the speech speed and sample rate just for a particular synthesis request:   
+<CodeGroup> 
+```python python
+audio_bytes = client.synthesize(
+    "Modern problems don't always require modern solutions.",
+    speed=1.5,  # Overrides default speed
+    sample_rate=16000  # Overrides default sample rate
+)
+```  
+</CodeGroup>
+
+## Conclusion  
+
+The Smallest AI Text-to-Speech SDK offers both synchronous and asynchronous options, catering to a variety of use cases:  
+
+- **Synchronous TTS**: Ideal for applications where immediate responses are needed, such as real-time voice assistants, chatbot integrations, or interactive voice systems. It ensures that the audio is generated and available instantly for use within the same execution flow.  
+
+- **Asynchronous TTS**: Designed for scenarios that involve handling multiple requests or large-scale processing. For example, if you need to convert multiple text inputs into speech concurrently, such as creating audio files for an audiobook or processing a batch of text-based announcements, asynchronous TTS allows you to execute these tasks efficiently without blocking other operations. This approach ensures scalability and optimal resource utilization, particularly in environments where time and performance are critical.  
+
+By understanding these modes and tailoring their usage to specific requirements, you can build highly responsive, scalable, and efficient solutions using the Smallest AI platform.
+
+
+If you have any questions or suggestions, please create an issue on the [smallest-python-sdk GitHub <Icon icon="arrow-up-right-from-square" iconType="solid" />](https://github.com/smallest-inc/smallest-python-sdk).
