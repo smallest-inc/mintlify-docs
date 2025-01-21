@@ -15,8 +15,8 @@ This example demonstrates how to stream text from a large language model (LLM) a
 In this example, text is generated using an LLM (Groq in this case, you can use any LLM), and the generated text is then passed to a TTS system (Smallest API) for real-time audio synthesis. The audio is saved as a `.wav` file. This entire process happens asynchronously to ensure smooth performance, especially when dealing with large or continuous streams of text.
 
 ### Code Walkthrough:
-
-```python
+<CodeGroup>
+```python python
 import wave
 import asyncio
 from groq import Groq
@@ -66,6 +66,7 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+</CodeGroup>
 
 ### Parameters:
 

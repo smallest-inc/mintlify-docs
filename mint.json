@@ -54,6 +54,12 @@
   ],
   "navigation": [
     {
+      "group": "Introduction",
+      "pages": [
+        "content/introduction/introduction"
+      ]
+    },
+    {
       "group": "Getting Started",
       "pages": [
         "content/getting-started/quickstart",
@@ -94,8 +100,8 @@
       "pages": [
         "content/api-references/waves-api",
         "content/api-references/get-voices-api",
-        "content/api-references/get-cloned-voices-api",
-        "content/api-references/add-voice-api"
+        "content/api-references/add-voice-api",
+        "content/api-references/get-cloned-voices-api"
       ]
     },
     {

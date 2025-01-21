@@ -1,6 +1,6 @@
 ---
 title: "How to use Text to Speech"
-description: ""
+description: "Learn how to synthesize your text using the Smallest AI API."
 icon: "wave-square"
 ---
 
@@ -30,7 +30,8 @@ export SMALLEST_API_KEY=your_api_key_here
 ## Synchronous Text to Speech
 
 Here is an example of how to synthesize text to speech synchronously:
-```python
+<CodeGroup>
+```python python
 from smallest import Smallest
 
 def main():
@@ -42,12 +43,14 @@ def main():
 
 if __name__ == "__main__":
     main()
-```  
+```
+</CodeGroup>  
 
 ## Asynchronous Text to Speech
 
 Here is an example of how to synthesize text to speech asynchronously:
-```python
+<CodeGroup>
+```python python
 import asyncio
 import aiofiles
 from smallest import AsyncSmallest
@@ -62,7 +65,8 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-``` 
+```
+</CodeGroup>
 
 ## Parameters:  
 
@@ -77,14 +81,16 @@ if __name__ == "__main__":
 
 These parameters are part of the `Smallest` and `AsyncSmallest` instance. They can be set when creating the instance (as shown above). However, the `synthesize` function also accepts `kwargs`, allowing you to override any of these parameters on a per-request basis.  
 
-For example, you can modify the speech speed and sample rate just for a particular synthesis request:  
-```py
+For example, you can modify the speech speed and sample rate just for a particular synthesis request:   
+<CodeGroup> 
+```python python
 audio_bytes = client.synthesize(
     "Modern problems don't always require modern solutions.",
     speed=1.5,  # Overrides default speed
     sample_rate=16000  # Overrides default sample rate
 )
-``` 
+```  
+</CodeGroup>
 
 ## Conclusion  
 
