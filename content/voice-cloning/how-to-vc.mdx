@@ -1,78 +1,89 @@
 ---
 title: "How to create a Voice"
 description: "Generate speech from audio files with the Lightning Large model via the new Waves API"
-openapi: "POST /api/v1/lightning-large/create"
-hideApiMarker: true
 icon: "compact-disc"
 ---
 
-The **Waves API - Lightning Large** model is an advanced version of our text-to-speech engine, optimized for high-quality synthesis of natural-sounding speech. This API allows you to upload audio files and generate custom speech outputs, with enhanced capabilities for professional-grade applications.
+In this tutorial, you will learn how to use the Smallest AI platform to create a voice by uploading an audio file. By the end of this tutorial, you will be able to clone your voice using our API.
 
-To get started with the Waves API, you need an API key/Bearer token. You can obtain this by logging into the [Waves](https://waves.smallest.ai) platform and selecting `API key` from the left panel.
+You can access the source code for the Python SDK on our [GitHub repository](https://github.com/smallest-inc/smallest-python-sdk).
 
-## API Endpoint
+## Requirements
 
-### **Create Speech from Audio**
+Before you begin, ensure you have the following:
 
-The following endpoint allows you to generate speech from a given audio file using the Lightning Large model:
+- Python (3.9 or higher) installed on your machine.
+- An API key from the Smallest AI platform (sign up [here](https://waves.smallest.ai)).
 
-```
-POST https://waves-api.smallest.ai/api/v1/lightning-large/create
-```
+## Setup
 
-### **Request Parameters**
-
-- **Authorization**: You need to include a Bearer token in the `Authorization` header.
-  
-- **File**: Upload your audio file using the `file` parameter. The file should be in WAV format.
-  
-- **displayName**: Provide a custom name for the generated audio output, such as a label or identifier for the request.
-
-### **Example cURL Request**
-
-Here is an example of how to use this API endpoint:
-
+### Install our SDK
 ```bash
-curl --location 'https://dev-waves-api.smallest.ai/api/v1/lightning-large/create' \
---header 'Authorization: Bearer YOUR_BEARER_TOKEN' \
---form 'file=@"/path/to/your/file.wav"' \
---form 'displayName="custom_audio_output"'
+pip install smallestai
 ```
 
-### **Parameters**
+Set your API key as an environment variable. 
+```bash
+export SMALLEST_API_KEY=YOUR_API_KEY
+``` 
 
-- **Authorization (header)**:  
-  - **Description**: Your Bearer token required for authentication.  
-  - **Example**: `'Authorization: Bearer YOUR_BEARER_TOKEN'`.
+## Add your Voice  
+The Smallest AI SDK allows you to clone your voice by uploading an audio file. This feature is available both synchronously and asynchronously, making it flexible for different use cases. Below are examples of how to use this functionality.  
 
-- **file (form)**:  
-  - **Description**: The WAV file that will be used as input for speech generation.  
-  - **Example**: `'file=@"/path/to/your/file.wav"'`.
+### Synchronously  
 
-- **displayName (form)**:  
-  - **Description**: A user-friendly name for the generated audio output.  
-  - **Example**: `'displayName="custom_audio_output"'`.
+<CodeGroup> 
+```python python 
+from smallest import Smallest
 
-### **Response**
+def main(): 
+    client = Smallest(api_key="YOUR_API_KEY")
+    res = client.add_voice(display_name="My Voice", file_path="my_voice.wav")
+    print(res)
 
-The API will return a success message along with the generated speech file (or a link to it), depending on the implementation. You can use the response to retrieve or further process the generated speech.
+if name == "main": 
+    main()
+```
+</CodeGroup>   
 
----
+### Asynchronously
+<CodeGroup>
+```python python
+import asyncio
+from smallest import AsyncSmallest
 
-## Models
+async def main():
+    client = AsyncSmallest(api_key="YOUR_API_KEY")
+    res = await client.add_voice(display_name="My Voice", file_path="my_voice.wav")
+    print(res)
 
-The **Lightning Large** model is designed for high-quality synthesis and is ideal for applications requiring more advanced speech generation capabilities. The model is especially suited for use cases like voiceovers, high-fidelity content creation, and more.
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+</CodeGroup>  
 
-For more information on model options and the latest updates, check our [announcements](content/changelog/announcements) page.
+## Parameters    
 
-## FAQ
+- `api_key`: Your API key (can be set via SMALLEST_API_KEY environment variable).
+- `display_name`: Name of the voice to be created.
+- `file_path`: Path to the audio file to be cloned.  
 
-- **What types of audio files are supported?**  
-  The API currently accepts **WAV** files for input.
+These parameters are part of the add_voice function. They can be set when calling the function as shown above.  
 
-- **How can I obtain my Bearer token?**  
-  To get your Bearer token, log into the [Waves platform](https://waves.smallest.ai), and click on the "API key" option in the left panel.
+## Get All Cloned Voices  
 
-- **How can I contact support?**  
-  If you have any questions or issues, please reach out to our support team at [support@smallest.ai](mailto:support@smallest.ai).
+Once you have cloned your voices, you can retrieve a list of all cloned voices associated with your account using the following code:  
+<CodeGroup>
+```python python
+from smallest import Smallest
 
+client = Smallest(api_key="YOUR_API_KEY")
+print(f"Available Voices: {client.get_cloned_voices()}")
+```
+</CodeGroup> 
+
+
+If you have any questions or run into any issues, our community is here to help!   
+
+- Join our [Discord server](https://discord.gg/ywShEyXHBW) to connect with other developers and get real-time support.  
+- Reach out to our team via email: [support@smallest.ai](mailto:support@smallest.ai).

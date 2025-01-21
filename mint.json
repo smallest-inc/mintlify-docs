@@ -7,9 +7,9 @@
   },
   "favicon": "/logo/favi.svg",
   "colors": {
-    "primary": "#22182A",
-    "light": "#D7C9FF",
-    "dark": "#22182A",
+    "primary": "#217D80",
+    "light": "#008080",
+    "dark": "#004D4D",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -70,14 +70,14 @@
       "group": "Text to Speech",
       "pages": [
         "content/text-to-speech/how-to-tts",
-        "content/text-to-speech/llm-to-tts"
+        "content/text-to-speech/llm-to-tts",
+        "content/text-to-speech/get-voice-models-langs"
       ]
     },
     {
       "group": "Voice Cloning",
       "pages": [
-        "content/voice-cloning/how-to-vc",
-        "content/voice-cloning/get-all-clones"
+        "content/voice-cloning/how-to-vc"
       ]
     },
     {

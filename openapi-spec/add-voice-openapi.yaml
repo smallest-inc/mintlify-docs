@@ -15,6 +15,8 @@ paths:
       summary: Add a new voice to the model
       description: Instantly clone a voice by uploading an audio file for the specified model.
       operationId: addVoiceToModel
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: model
@@ -30,32 +32,68 @@ paths:
             schema:
               type: object
               properties:
+                displayName:
+                  type: string
+                  description: Display name for the voice clone
                 file:
                   type: string
                   format: binary
-                  description: The audio file (.wav) containing the voice to be cloned.
-                displayName:
-                  type: string
-                  description: The display name for the cloned voice.
+                  description: Audio file to create voice clone from
               required:
-                - file
                 - displayName
+                - file
       responses:
-        '201':
-          description: Voice successfully added to the model.
+        '200':
+          description: Voice clone created successfully
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  voice_id:
-                    type: string
-                    description: The unique ID of the newly added voice.
                   message:
                     type: string
-                    description: Success message.
+                    example: Voice clone created successfully
+                  data:
+                    type: object
+                    properties:
+                      voiceId:
+                        type: string
+                        example: voice_XfFIkALD7q
+                      model:
+                        type: object
+                        properties:
+                          _doc:
+                            type: object
+                            properties:
+                              _id:
+                                type: string
+                              modelName:
+                                type: string
+                                example: lightning-large
+                              voiceIds:
+                                type: array
+                                items:
+                                  type: string
+                              pricePerMinute:
+                                type: number
+                                example: 0.03
+                              displayName:
+                                type: string
+                                example: Lightning Large
+                              description:
+                                type: string
+                                example: Superior voice cloning. Supports english and hindi.
+                              hasVoiceClone:
+                                type: boolean
+                                example: true
+                              beta:
+                                type: boolean
+                                example: true
+                      status:
+                        type: string
+                        example: processing
         '400':
-          description: Bad request
+          description: Bad request or limit exceeded
           content:
             application/json:
               schema:
@@ -63,42 +101,12 @@ paths:
                 properties:
                   error:
                     type: string
-                    description: Error type
-                  message:
-                    type: string
-                    description: Error message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error type
-                  message:
-                    type: string
-                    description: Error message
-        '500':
-          description: Server error occurred
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error type
-                  message:
-                    type: string
-                    description: Error message
-      security:
-        - bearerAuth: []
+                    example: clone limit exceeded, consider upgrading
 
 components:
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: JWT token for authentication
