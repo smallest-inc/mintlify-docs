@@ -21,7 +21,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [lightning]
+            enum: [lightning, lightning-large]
           description: The model to use for speech synthesis. Currently, only 'lightning' is available.
         - in: header
           name: Authorization
