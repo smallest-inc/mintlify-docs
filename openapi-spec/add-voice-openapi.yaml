@@ -34,11 +34,11 @@ paths:
               properties:
                 displayName:
                   type: string
-                  description: Display name for the voice clone
+                  description: Display name for the voice clone.
                 file:
                   type: string
                   format: binary
-                  description: Audio file to create voice clone from
+                  description: Audio file to create voice clone from.
               required:
                 - displayName
                 - file
