@@ -37,40 +37,17 @@ paths:
                     items:
                       type: object
                       properties:
-                        _id:
-                          type: string
-                          description: Unique identifier for the voice document.
-                          example: "6718a3981d24244952896cae"
                         voiceId:
                           type: string
-                          description: Voice identifier.
-                          example: "william"
+                          description: Unique Voice ID.
                         displayName:
                           type: string
-                          description: Display name of the voice.
-                          example: "William"
-                        description:
-                          type: string
-                          description: A brief description of the voice.
-                          example: "Professional, podcast, male voice"
-                        avatar:
-                          type: string
-                          description: Avatar image for the voice.
-                          example: "-"
-                        audioPreview:
-                          type: string
-                          description: URL to the audio preview of the voice.
-                          example: "https://d4a5s42qh2351.cloudfront.net/waves-audio-previews/william.wav"
+                          description: Display name for the voice.
                         tags:
                           type: array
-                          description: Tags associated with the voice.
+                          description: List of tags associated with the voice.
                           items:
                             type: string
-                            example: "professional"
-                        __v:
-                          type: integer
-                          description: Versioning number for the voice document.
-                          example: 0
         '400':
           description: Bad request
           content:

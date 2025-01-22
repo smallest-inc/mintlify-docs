@@ -30,10 +30,6 @@
       "url": "https://discord.gg/5evETqguJs"
     },
     {
-      "name": "GitHub",
-      "url": "https://github.com/smallest-inc"
-    },
-    {
       "name": "Blog",
       "url": "https://smallest.ai/blog"
     }
@@ -41,79 +37,80 @@
   "tabs": [
     {
       "name": "API Reference",
-      "url": "content/api-references"
+      "url": "/content/api-references"
     },
     {
       "name": "Client Libraries",
-      "url": "content/client-libraries"
+      "url": "/content/client-libraries"
     },
     {
       "name": "Changelog",
-      "url": "content/changelog"
+      "url": "/content/changelog"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
       "pages": [
-        "content/introduction/introduction"
+        "/content/introduction/introduction"
       ]
     },
     {
       "group": "Getting Started",
       "pages": [
-        "content/getting-started/quickstart",
-        "content/getting-started/models"
+        "/content/getting-started/quickstart",
+        "/content/getting-started/models",
+        "/content/getting-started/authentication"
       ]
     },
     {
       "group": "Text to Speech",
       "pages": [
-        "content/text-to-speech/how-to-tts",
-        "content/text-to-speech/llm-to-tts",
-        "content/text-to-speech/get-voice-models-langs"
+        "/content/text-to-speech/how-to-tts",
+        "/content/text-to-speech/llm-to-tts",
+        "/content/text-to-speech/get-voice-models-langs"
       ]
     },
     {
       "group": "Voice Cloning",
       "pages": [
-        "content/voice-cloning/how-to-vc"
+        "/content/voice-cloning/how-to-vc"
       ]
     },
     {
       "group": "Integrations",
       "pages": [
-        "content/integrations/livekit",
-        "content/integrations/plivo",
-        "content/integrations/vonage"
+        "/content/integrations/livekit",
+        "/content/integrations/plivo",
+        "/content/integrations/vonage"
       ]
     },
     {
       "group": "Best Practices",
       "pages": [
-        "content/best-practices/vc-best-practices",
-        "content/best-practices/tts-best-practices"
+        "/content/best-practices/vc-best-practices",
+        "/content/best-practices/tts-best-practices"
       ]
     },
     {
       "group": "API References",
       "pages": [
-        "content/api-references/waves-api",
-        "content/api-references/get-voices-api",
-        "content/api-references/add-voice-api",
-        "content/api-references/get-cloned-voices-api"
+        "/content/api-references/waves-api",
+        "/content/api-references/get-voices-api",
+        "/content/api-references/add-voice-api",
+        "/content/api-references/get-cloned-voices-api"
       ]
     },
     {
       "group": "Client Libraries",
       "pages": [
-        "content/client-libraries/overview"
+        "/content/client-libraries/overview"
       ]
     },
     {
       "group": "Changelog",
       "pages": [
-        "content/changelog/announcements"
+        "/content/changelog/announcements"
       ]
     }
   ],

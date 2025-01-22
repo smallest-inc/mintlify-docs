@@ -34,11 +34,11 @@ paths:
               properties:
                 displayName:
                   type: string
-                  description: Display name for the voice clone
+                  description: Display name for the voice clone.
                 file:
                   type: string
                   format: binary
-                  description: Audio file to create voice clone from
+                  description: Audio file to create voice clone from.
               required:
                 - displayName
                 - file
@@ -52,46 +52,19 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Voice clone created successfully
+                    description: Message if the voice clone was created successfully.
                   data:
                     type: object
                     properties:
                       voiceId:
                         type: string
-                        example: voice_XfFIkALD7q
+                        description: Unique Voice ID.
                       model:
-                        type: object
-                        properties:
-                          _doc:
-                            type: object
-                            properties:
-                              _id:
-                                type: string
-                              modelName:
-                                type: string
-                                example: lightning-large
-                              voiceIds:
-                                type: array
-                                items:
-                                  type: string
-                              pricePerMinute:
-                                type: number
-                                example: 0.03
-                              displayName:
-                                type: string
-                                example: Lightning Large
-                              description:
-                                type: string
-                                example: Superior voice cloning. Supports english and hindi.
-                              hasVoiceClone:
-                                type: boolean
-                                example: true
-                              beta:
-                                type: boolean
-                                example: true
+                        type: string
+                        description: Model used to generate the voice.
                       status:
                         type: string
-                        example: processing
+                        description: Status of the voice creation.
         '400':
           description: Bad request or limit exceeded
           content:

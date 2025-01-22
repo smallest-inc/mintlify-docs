@@ -37,89 +37,30 @@ paths:
                     items:
                       type: object
                       properties:
-                        _id:
+                        displayName:
                           type: string
-                          description: Unique identifier for the voice document.
-                          example: "678e0619de0d36b417019ac2"
-                        voiceId:
-                          type: string
-                          description: Unique identifier for the voice.
-                          example: "voice_gd48BlQqzT"
+                          description: Display name for the voice.
                         accent:
                           type: string
                           description: Accent of the voice.
-                          example: "general"
                         tags:
                           type: array
-                          description: Tags associated with the voice.
+                          description: List of tags associated with the voice.
                           items:
                             type: string
-                            example: "casual"
+                        voiceId:
+                          type: string
+                          description: Unique Voice ID.
+                        model:
+                          type: string
+                          description: Model used to generate the voice.
                         status:
                           type: string
-                          description: Status of the voice.
-                          example: "completed"
-                        audioFileNames:
-                          type: array
-                          description: List of audio file names associated with the voice.
-                          items:
-                            type: string
-                            example: "reference_audio.wav"
-                        model:
-                          type: object
-                          description: Model information for the voice.
-                          properties:
-                            _id:
-                              type: string
-                              description: Unique identifier for the model.
-                              example: "676bb4632b500895590edf6d"
-                            modelName:
-                              type: string
-                              description: Name of the model.
-                              example: "lightning-large"
-                            __v:
-                              type: integer
-                              description: Versioning number for the model document.
-                              example: 3
-                            pricePerMinute:
-                              type: number
-                              format: float
-                              description: Price per minute of usage for the model.
-                              example: 0.03
-                            displayName:
-                              type: string
-                              description: Display name of the model.
-                              example: "Lightning Large"
-                            description:
-                              type: string
-                              description: Description of the model.
-                              example: "Superior voice cloning. Supports English and Hindi."
-                            hasVoiceClone:
-                              type: boolean
-                              description: Whether the model supports voice cloning.
-                              example: true
-                            beta:
-                              type: boolean
-                              description: Whether the model is in beta.
-                              example: true
+                          description: Status of the voice generation.
                         createdAt:
                           type: string
                           format: date-time
-                          description: The time when the voice was created.
-                          example: "2025-01-20T08:15:21.934Z"
-                        updatedAt:
-                          type: string
-                          format: date-time
-                          description: The last update time for the voice.
-                          example: "2025-01-20T08:15:53.308Z"
-                        __v:
-                          type: integer
-                          description: Versioning number for the voice document.
-                          example: 0
-                        displayName:
-                          type: string
-                          description: Display name of the voice.
-                          example: "cloned voice"
+                          description: Date and time the voice was created.
         '400':
           description: Bad request
           content:
