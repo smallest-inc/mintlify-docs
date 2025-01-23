@@ -70,14 +70,16 @@ if __name__ == "__main__":
 
 ## Parameters   
 
-- `api_key`: Your API key (can be set via SMALLEST_API_KEY environment variable)
-- `model`: TTS model to use (default: "lightning")
-- `sample_rate`: Audio sample rate (default: 24000)
-- `voice_id`: Voice ID (default: "emily")
-- `speed`: Speech speed multiplier (default: 1.0)
-- `add_wav_header`: Include WAV header in output (default: True)
-- `transliterate`: Enable text transliteration (default: False)
-- `remove_extra_silence`: Remove additional silence (default: True)   
+- `api_key` (str): Your API key (can be set via SMALLEST_API_KEY environment variable)
+- `model` (str): TTS model to use (default: "lightning")
+- `sample_rate` (int): Audio sample rate (default: 24000)
+- `voice_id` (str): Voice ID (default: "emily")
+- `speed` (float): Speech speed multiplier (default: 1.0)
+- `add_wav_header` (bool): Include WAV header in output (default: True)
+- `transliterate` (bool): Enable text transliteration (default: False)
+- `remove_extra_silence` (bool): Remove additional silence (default: True)   
+
+> **Note:** While the transliterate parameter is provided, please note that it is not fully supported and may not perform consistently across all cases. It is recommended to use the model without relying on this parameter. Please refer to [Best practices](/content/best-practices/tts-best-practices) for more details.
 
 These parameters are part of the `Smallest` and `AsyncSmallest` instance. They can be set when creating the instance (as shown above). However, the `synthesize` function also accepts `kwargs`, allowing you to override any of these parameters on a per-request basis.  
 
