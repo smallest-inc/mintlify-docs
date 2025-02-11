@@ -157,24 +157,24 @@ For specific reading patterns:
 ### Date Formats
 You may use any of the following formats when writing dates:
 
-1. **DD/MM/YYYY** → `12/02/2025`  
-2. **DD-MM-YYYY** → `12-02-2025`  
-3. **DD Month YYYY** → `12 February 2025`  
-4. **Month DD YYYY** → `February 12 2025`  
-5. **DD-MM-YY** → `12-02-25`  
-6. **DD/MM/YY** → `12/02/25`  
+1. DD/MM/YYYY → `12/02/2025`
+2. DD-MM-YYYY → `12-02-2025`
+3. DD Month YYYY → `12 February 2025`
+4. Month DD YYYY → `February 12th 2025`
+5. DD-MM-YY → `12-02-25`
+6. DD/MM/YY → `12/02/25`
 
 > Note: Ordinal suffixes (st, nd, rd, th) could be used in dates.
 
-Examples of Correct Date Usage: 
+```
 ✅ My birthday is on **31/12/2002**.  
 ✅ The event is scheduled for **05th March 2024**.  
 ✅ We will launch the project on **June 15 2023**.  
 ✅ The deadline is **30-06-24**.  
 
-**Examples of Incorrect Date Usage:**  
-❌ **21st of June, 2003**. (Incorrect because "of" is not allowed)  
-❌ **12.02.2025**. (Incorrect because dots are not an allowed separator)  
+❌ 21st of June, 2003. (Incorrect because "of" is not allowed)  
+❌ 12.02.2025. (Incorrect because dots are not an allowed separator)  
+```
 
 ### Time Formats
 You may use the following formats when specifying time:
@@ -182,16 +182,15 @@ You may use the following formats when specifying time:
 1. HH:MM:SS → `14:30:15`  
 2. HH:MM → `14:30`  
 
-Examples of Correct Time Usage:
+```
 ✅ Let's meet at **12:32 PM on 12/02/2025**.  
 ✅ The meeting starts at **09:45 AM**.  
 ✅ The match will begin at **18:00**.  
 ✅ The alarm is set for **07:15:30**.  
 
-Examples of Incorrect Time Usage:
-❌ **14.30** (Incorrect because dots are not an allowed separator)  
-❌ **7:5 AM** (Incorrect because the minute value must always be two digits) 
-
+❌ 14.30 (Incorrect because dots are not an allowed separator)  
+❌ 7'5 AM (Incorrect because ' cannot be used) 
+```
 
 ## Mathematical Expressions
 
