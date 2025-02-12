@@ -74,8 +74,11 @@
     {
       "group": "Voice Cloning",
       "pages": [
+        "/content/voice-cloning/types-of-clone",
+        "/content/voice-cloning/how-to-vc-ui",
         "/content/voice-cloning/how-to-vc",
         "/content/voice-cloning/how-to-pvc"
+
       ]
     },
     {
