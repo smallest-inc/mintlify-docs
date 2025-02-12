@@ -74,7 +74,11 @@
     {
       "group": "Voice Cloning",
       "pages": [
-        "/content/voice-cloning/how-to-vc"
+        "/content/voice-cloning/types-of-clone",
+        "/content/voice-cloning/how-to-vc-ui",
+        "/content/voice-cloning/how-to-vc",
+        "/content/voice-cloning/how-to-pvc"
+
       ]
     },
     {
@@ -89,6 +93,7 @@
       "group": "Best Practices",
       "pages": [
         "/content/best-practices/vc-best-practices",
+        "/content/best-practices/pvc-best-practices",
         "/content/best-practices/tts-best-practices"
       ]
     },
