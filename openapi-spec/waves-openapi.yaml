@@ -58,7 +58,7 @@ paths:
                   default: 1.0
                 consistency:
                   type: number
-                  description: Parameter to control repitition and skipping of words. To remove skipping of words, reduce this value. To remove repitition of words, increase this value.
+                  description: This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to reduce repetition.
                   minimum: 0.8
                   maximum: 1.2
                   default: 1.0
