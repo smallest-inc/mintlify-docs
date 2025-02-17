@@ -56,12 +56,19 @@ paths:
                   minimum: 0.5
                   maximum: 2.0
                   default: 1.0
+                consistency:
+                  type: number
+                  description: Parameter to control repitition and skipping of words. To remove skipping of words, reduce this value. To remove repitition of words, increase this value.
+                  minimum: 0.8
+                  maximum: 1.2
+                  default: 1.0
             example:
               text: Hello, this is an example.
               voice_id: 1234-voice-id
               add_wav_header: true
               sample_rate: 24000
               speed: 1.0
+              consistency: 1.0
       responses:
         '200':
           description: Synthesized speech retrieved successfully.
