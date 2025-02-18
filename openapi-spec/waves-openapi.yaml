@@ -59,9 +59,9 @@ paths:
                 consistency:
                   type: number
                   description: This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to prevent repetition.
-                  minimum: 0.8
-                  maximum: 1.2
-                  default: 1.0
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 0.5
             example:
               text: Hello, this is an example.
               voice_id: 1234-voice-id
