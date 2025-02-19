@@ -1,0 +1,200 @@
+openapi: 3.0.1
+info:
+  title: Waves API
+  description: |
+    API for the new Waves text-to-speech model.
+    Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
+  version: 1.0.0
+servers:
+  - url: https://waves-api.smallest.ai
+    description: Waves API server
+
+paths:
+  /api/v1/lightning/get_speech:
+    post:
+      summary: Generate speech from text (Lightning)
+      description: Converts provided text to speech using the Lightning model.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LightningRequest'
+      responses:
+        '200':
+          description: Synthesized speech retrieved successfully.
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+                description: A PCM int16 WAV file at the specified sample rate.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "InvalidRequest"
+                message: "The 'text' field is required."
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Unauthorized"
+                message: "Bearer token is missing or invalid."
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "InternalServerError"
+                message: "An unexpected error occurred."
+
+  /api/v1/lightning-large/get_speech:
+    post:
+      summary: Generate speech from text (Lightning Large)
+      description: Converts provided text to speech using the Lightning Large model.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LightningLargeRequest'
+      responses:
+        '200':
+          description: Synthesized speech retrieved successfully.
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+                description: A PCM int16 WAV file at the specified sample rate.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "InvalidRequest"
+                message: "The 'text' field is required."
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Unauthorized"
+                message: "Bearer token is missing or invalid."
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "InternalServerError"
+                message: "An unexpected error occurred."
+
+components:
+  schemas:
+    LightningRequest:
+      type: object
+      required:
+        - text
+        - voice_id
+      properties:
+        text:
+          type: string
+          description: The text to convert to speech.
+        voice_id:
+          type: string
+          description: The voice identifier to use for speech generation.
+        add_wav_header:
+          type: boolean
+          description: Whether to add WAV header to the output.
+          default: false
+        sample_rate:
+          type: integer
+          description: The sample rate for the generated audio.
+          minimum: 8000
+          maximum: 24000
+          default: 24000
+        speed:
+          type: number
+          description: The speed of the generated speech.
+          minimum: 0.5
+          maximum: 2.0
+          default: 1.0
+
+    LightningLargeRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/LightningRequest'
+      properties:
+        consistency:
+          type: number
+          description: This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to prevent repetition.
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.5
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
