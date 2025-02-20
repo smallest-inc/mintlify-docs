@@ -102,8 +102,9 @@
       "pages": [
         "/content/api-references/lightning",
         "/content/api-references/lightning-large",
-        "/content/api-references/get-voices-api",
         "/content/api-references/add-voice-api",
+        "/content/api-references/delete-voice-api",
+        "/content/api-references/get-voices-api",
         "/content/api-references/get-cloned-voices-api"
       ]
     },
@@ -124,5 +125,5 @@
     "twitter": "https://twitter.com/smallest_AI",
     "linkedin": "https://www.linkedin.com/company/smallest"
   },
-  "openapi": ["openapi-spec/waves-api.yaml", "openapi-spec/get-voices-openapi.yaml", "openapi-spec/get-cloned-voices-openapi.yaml"]
+  "openapi": ["openapi-spec/waves-api.yaml", "openapi-spec/get-voices-openapi.yaml", "openapi-spec/get-cloned-voices-openapi.yaml", "openapi-spec/delete-voice-openapi.yaml"]
 }
