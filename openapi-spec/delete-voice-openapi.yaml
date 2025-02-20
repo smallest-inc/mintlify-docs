@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: Get Voices
+  title: Waves API
   description: |
-    API Endpoint to get voices supported by our models.
+    API for the new Waves text-to-speech model.
     Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
   version: 1.0.0
 servers:
@@ -10,57 +10,49 @@ servers:
     description: Waves API server
 
 paths:
-  /api/v1/{model}/get_voices:
-    get:
-      summary: Get Voices
-      description: Fetch voices for a given model.
-      operationId: getWavesVoices
-      parameters:
-        - in: path
-          name: model
-          required: true
-          schema:
-            type: string
-            enum: [lightning, lightning-large]
-          description: The model to use for speech synthesis.
+  /api/v1/lightning-large/delete:
+    post:
+      summary: Delete a voice
+      description: Remove a cloned voice from the platform.
+      operationId: deleteVoiceFromModel
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voiceId:
+                  type: string
+                  description: Voice ID of the voice to be deleted.
+              required:
+                - voiceId
       responses:
         '200':
-          description: Voices retrieved successfully.
+          description: Voice deleted successfully.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  voices:
-                    type: array
-                    description: List of available voices.
-                    items:
-                      type: object
-                      properties:
-                        voiceId:
-                          type: string
-                          description: Unique Voice ID.
-                        displayName:
-                          type: string
-                          description: Display name for the voice.
-                        tags:
-                          type: array
-                          description: List of tags associated with the voice.
-                          items:
-                            type: string
+                  success:
+                    type: boolean
+                    description: True if the voice was deleted successfully.
+                  voiceId:
+                    type: string
+                    description: ID of the deleted voice.
         '400':
-          description: Bad request
+          description: Bad request or limit exceeded.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  errors:
                     type: string
-                    description: Error type
-                  message:
-                    type: string
-                    description: Error message
+                    example: Voice ID required
         '401':
           description: Unauthorized.
           content:
@@ -93,12 +85,11 @@ paths:
               example:
                 error: "InternalServerError"
                 message: "An unexpected error occurred."
-      security:
-        - bearerAuth: []
 
 components:
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: JWT token for authentication.

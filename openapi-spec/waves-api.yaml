@@ -164,10 +164,6 @@ components:
         voice_id:
           type: string
           description: The voice identifier to use for speech generation.
-        add_wav_header:
-          type: boolean
-          description: Whether to add WAV header to the output.
-          default: false
         sample_rate:
           type: integer
           description: The sample rate for the generated audio.
@@ -180,18 +176,50 @@ components:
           minimum: 0.5
           maximum: 2.0
           default: 1.0
+        seed:
+          type: integer
+          description: Optional random seed for controlling the deterministic behavior of speech generation. Using the same seed with the same input will produce identical outputs.
+          minimum: 0
+          maximum: 4294967295
+        add_wav_header:
+          type: boolean
+          description: Whether to add WAV header to the output.
+          default: false
 
     LightningLargeRequest:
       type: object
-      allOf:
-        - $ref: '#/components/schemas/LightningRequest'
+      required:
+        - text
+        - voice_id
       properties:
+        text:
+          type: string
+          description: The text to convert to speech.
+        voice_id:
+          type: string
+          description: The voice identifier to use for speech generation.
+        sample_rate:
+          type: integer
+          description: The sample rate for the generated audio.
+          minimum: 8000
+          maximum: 24000
+          default: 24000
+        speed:
+          type: number
+          description: The speed of the generated speech.
+          minimum: 0.5
+          maximum: 2.0
+          default: 1.0
         consistency:
           type: number
           description: This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to prevent repetition.
-          minimum: 0.0
-          maximum: 1.0
+          minimum: 0
+          maximum: 1
           default: 0.5
+        add_wav_header:
+          type: boolean
+          description: Whether to add WAV header to the output.
+          default: false
 
   securitySchemes:
     bearerAuth:

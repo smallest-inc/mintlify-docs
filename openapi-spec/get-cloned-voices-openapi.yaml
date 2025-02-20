@@ -10,19 +10,11 @@ servers:
     description: Waves API server
 
 paths:
-  /api/v1/{model}/get_cloned_voices:
+  /api/v1/lightning-large/get_cloned_voices:
     get:
       summary: Get Voices
       description: Fetch your cloned voices.
       operationId: getWavesVoices
-      parameters:
-        - in: path
-          name: model
-          required: true
-          schema:
-            type: string
-            enum: [lightning-large]
-          description: The model to use for speech synthesis.
       responses:
         '200':
           description: Voices retrieved successfully.
@@ -75,7 +67,7 @@ paths:
                     type: string
                     description: Error message
         '401':
-          description: Unauthorized
+          description: Unauthorized.
           content:
             application/json:
               schema:
@@ -83,12 +75,15 @@ paths:
                 properties:
                   error:
                     type: string
-                    description: Error type
+                    description: Error type.
                   message:
                     type: string
-                    description: Error message
+                    description: Error message.
+              example:
+                error: "Unauthorized"
+                message: "Bearer token is missing or invalid."
         '500':
-          description: Server error occurred
+          description: Server error occurred.
           content:
             application/json:
               schema:
@@ -96,10 +91,13 @@ paths:
                 properties:
                   error:
                     type: string
-                    description: Error type
+                    description: Error type.
                   message:
                     type: string
-                    description: Error message
+                    description: Error message.
+              example:
+                error: "InternalServerError"
+                message: "An unexpected error occurred."
       security:
         - bearerAuth: []
 

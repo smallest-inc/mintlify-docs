@@ -10,7 +10,7 @@ servers:
     description: Waves API server
 
 paths:
-  /api/v1/{model}/add_voice:
+  /api/v1/lightning-large/add_voice:
     post:
       summary: Add a new voice to the model
       description: Instantly clone a voice by uploading an audio file for the specified model.
@@ -75,6 +75,38 @@ paths:
                   error:
                     type: string
                     example: clone limit exceeded, consider upgrading
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Unauthorized"
+                message: "Bearer token is missing or invalid."
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: "InternalServerError"
+                message: "An unexpected error occurred."
 
 components:
   securitySchemes:
