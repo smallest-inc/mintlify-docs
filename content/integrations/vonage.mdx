@@ -28,6 +28,8 @@ Start by creating a `.env` file in your project directory with the necessary API
 ```bash
 SMALLEST_API_KEY=...
 VONAGE_APPLICATION_ID=...
+VONAGE_PHONE=...
+VONAGE_TO_PHONE=...
 ```
 
 Additionally, ensure that the private key is added to `secrets/private.key`.
@@ -41,7 +43,7 @@ Additionally, ensure that the private key is added to `secrets/private.key`.
 
 - For Vonage:
 ```bash
-ngrok http 8000
+ngrok http 5000
 ```
 
 3. Once ngrok is running, it will generate a public URL (e.g., `https://abcd-1234-5678.ngrok.io`).
@@ -51,6 +53,7 @@ ngrok http 8000
 To run the example code, you’ll need to install the required dependencies. Run the following command:
 
 ```bash
+cd lightning/telephone_example
 pip install -r requirements.txt
 ```
 
@@ -61,6 +64,7 @@ Now, you can start the FastAPI server, which will handle the streaming of audio.
 Run the Vonage server:
 
 ```bash
+cd lightning/telephone_example
 python vonage_example/vonage_app.py
 ```
 
