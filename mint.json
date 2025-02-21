@@ -86,7 +86,8 @@
       "pages": [
         "/content/integrations/livekit",
         "/content/integrations/plivo",
-        "/content/integrations/vonage"
+        "/content/integrations/vonage",
+        "/content/integrations/twilio"
       ]
     },
     {
