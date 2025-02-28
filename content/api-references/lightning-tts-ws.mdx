@@ -1,0 +1,212 @@
+---
+title: 'WebSocket API'
+sidebarTitle: 'Text to Speech (WSS)'
+description: 'Stream speech for given text using the Lightning WebSocket API'
+hideApiMarker: False
+---
+
+## WebSocket API
+
+The Lightning WebSocket API allows you to stream text-to-speech audio in real-time. This is particularly useful for applications requiring low-latency audio generation.
+
+### Connection
+
+Connect to the WebSocket endpoint:
+
+```javascript
+const ws = new WebSocket(
+  'wss://api.smallest.ai/api/v1/lightning/stream'
+);
+```
+
+### Authentication
+
+Authentication is required. Include your API key in the connection headers:
+
+```javascript
+const ws = new WebSocket(
+  'wss://api.smallest.ai/api/v1/lightning/stream',
+  {
+    headers: {
+      Authorization: 'Bearer YOUR_API_KEY'
+    }
+  }
+);
+```
+
+### Request Format
+
+Send a JSON message with the following structure:
+
+```json
+{
+  "text": "Your text to be converted to speech",
+  "voice_id": "voice_id_here",
+  "speed": 1,
+  "sample_rate": 24000
+}
+```
+
+#### Parameters
+
+| Parameter     | Type   | Required | Description                                         |
+| ------------- | ------ | -------- | --------------------------------------------------- |
+| `text`        | string | Yes      | The text to convert to speech (max 1000 characters) |
+| `voice_id`    | string | Yes      | ID of the voice to use                              |
+| `speed`       | number | No       | Speech speed multiplier (default: 1)                |
+| `sample_rate` | number | No       | Audio sample rate in Hz (default: 24000)            |
+
+### Try It Now
+
+<WebSocketPlayground
+  endpoint='wss://api.smallest.ai/api/v1/lightning/stream'
+  method='WebSocket'
+  requestFormat='json'
+  defaultBody={{
+    text: 'Hello world! This is a test of the Lightning TTS WebSocket API.',
+    voice_id: 'en_female_1',
+    speed: 1,
+    sample_rate: 24000
+  }}
+  responseFormat='audio'
+/>
+
+### Response Format
+
+The WebSocket will stream responses in the following formats:
+
+#### Chunk Response
+
+```json
+{
+  "status": "chunk",
+  "data": {
+    "audio": "base64_encoded_audio_data"
+  }
+}
+```
+
+The audio data is base64-encoded and can be decoded and played in the browser.
+
+#### Success Response
+
+When all chunks have been sent:
+
+```json
+{
+  "status": "success",
+  "message": "All chunks sent",
+  "done": true
+}
+```
+
+#### Error Response
+
+If an error occurs:
+
+```json
+{
+  "status": "error",
+  "message": "Error message",
+  "errors": [
+    /* detailed error information */
+  ]
+}
+```
+
+### Javascript Example
+
+```javascript
+const WebSocket = require('ws');
+
+const ws = new WebSocket(
+  'wss://waves-api.smallest.ai/api/v1/lightning/get_speech/stream',
+  {
+    headers: {
+      Authorization: 'Bearer YOUR_API_KEY'
+    }
+  }
+);
+
+ws.onopen = () => {
+  const request = {
+    text: 'Hello world! This is a test of the Lightning TTS WebSocket API.',
+    voice_id: 'arman',
+    speed: 1,
+    sample_rate: 24000
+  };
+
+  ws.send(JSON.stringify(request));
+};
+
+// Handle incoming audio chunks
+ws.onmessage = (event) => {
+  const response = JSON.parse(event.data);
+
+  if (response.status === 'chunk') {
+    // Decode and play audio
+    const audioData = Buffer.from(response.data.audio, 'base64');
+    // Process audio data...
+  } else if (response.status === 'success' && response.done) {
+    console.log('All audio chunks received');
+    ws.close();
+  } else if (response.status === 'error') {
+    console.error('Error:', response.message);
+    ws.close();
+  }
+};
+
+ws.onerror = (error) => {
+  console.error('WebSocket error:', error);
+};
+
+ws.onclose = () => {
+  console.log('WebSocket connection closed');
+};
+```
+
+### Python Example
+
+```python
+import asyncio
+import websockets
+import json
+import base64
+
+API_KEY = "YOUR_API_KEY"
+WS_URL = "wss://waves-api.smallest.ai/api/v1/lightning-large/get_speech/stream"
+
+async def text_to_speech():
+    async with websockets.connect(WS_URL, extra_headers={"Authorization": f"Bearer {API_KEY}"}) as ws:
+        request = {
+            "text": "Hello world! This is a test of the Lightning-Large TTS WebSocket API.",
+            "voice_id": "arman",
+            "speed": 1,
+            "sample_rate": 24000
+        }
+
+        await ws.send(json.dumps(request))
+
+        while True:
+            response = await ws.recv()
+            response_data = json.loads(response)
+
+            if response_data["status"] == "chunk":
+                audio_data = base64.b64decode(response_data["data"]["audio"])
+                print("Received audio chunk")
+            elif response_data["status"] == "success" and response_data.get("done", False):
+                print("All audio chunks received")
+                break
+            elif response_data["status"] == "error":
+                print("Error:", response_data["message"])
+                break
+
+asyncio.run(text_to_speech())
+```
+
+### Notes
+
+- The API automatically chunks long text and streams each chunk separately
+- Credits are deducted based on the length of the input text
+- The WebSocket connection will remain open until all chunks are sent or an error occurs
+- For optimal performance, keep individual requests under 1000 characters

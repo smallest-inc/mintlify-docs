@@ -1,0 +1,33 @@
+---
+title: Authentication
+description: Learn how to authenticate requests using API keys.
+---
+
+# Authentication
+
+Our API requires authentication using API keys to ensure secure access.
+
+## Obtaining Your API Key
+
+To access our API, you need an API key. You can find your API key by visiting [Smallest AI Console](https://console.smallest.ai/apikeys).
+
+## Using API Keys
+
+Once you have an API key, you must include it in the `Authorization` header of each request using the **Bearer Token** scheme.
+
+### Example Request
+
+```http
+GET /v1/some-endpoint HTTP/1.1
+Host: api.smallest.ai
+Authorization: Bearer YOUR_API_KEY_HERE
+```
+
+## Security Best Practices
+
+- **Keep your API key private**: Do not expose your key in client-side applications.
+- **Rotate keys periodically**: Regularly regenerate your API keys to enhance security.
+- **Use environment variables**: Store API keys securely instead of hardcoding them in your source code.
+- **Monitor API usage**: Keep track of your API calls to detect any unauthorized access.
+
+For more details, visit our [API Documentation](/docs/authentication).

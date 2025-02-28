@@ -51,9 +51,7 @@
   "navigation": [
     {
       "group": "Introduction",
-      "pages": [
-        "/content/introduction/introduction"
-      ]
+      "pages": ["/content/introduction/introduction"]
     },
     {
       "group": "Getting Started",
@@ -78,7 +76,6 @@
         "/content/voice-cloning/how-to-vc-ui",
         "/content/voice-cloning/how-to-vc",
         "/content/voice-cloning/how-to-pvc"
-
       ]
     },
     {
@@ -100,29 +97,52 @@
     {
       "group": "API References",
       "pages": [
+        "/content/api-references/authentication",
+        "/content/api-references/websocket"
+      ]
+    },
+    {
+      "group": "Lightning",
+      "pages": [
         "/content/api-references/lightning",
+        "/content/api-references/lightning-tts-ws"
+      ]
+    },
+    {
+      "group": "Lightning Large",
+      "pages": [
         "/content/api-references/lightning-large",
-        "/content/api-references/get-voices-api",
+        "/content/api-references/lightning-large-ws"
+      ]
+    },
+    {
+      "group": "Voices",
+      "pages": ["/content/api-references/get-voices-api"]
+    },
+    {
+      "group": "Voice Cloning",
+      "pages": [
         "/content/api-references/add-voice-api",
-        "/content/api-references/get-cloned-voices-api"
+        "/content/api-references/get-cloned-voices-api",
+        "/content/api-references/delete-cloned-voice"
       ]
     },
     {
       "group": "Client Libraries",
-      "pages": [
-        "/content/client-libraries/overview"
-      ]
+      "pages": ["/content/client-libraries/overview"]
     },
     {
       "group": "Changelog",
-      "pages": [
-        "/content/changelog/announcements"
-      ]
+      "pages": ["/content/changelog/announcements"]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/smallest_AI",
     "linkedin": "https://www.linkedin.com/company/smallest"
   },
-  "openapi": ["openapi-spec/waves-api.yaml", "openapi-spec/get-voices-openapi.yaml", "openapi-spec/get-cloned-voices-openapi.yaml"]
+  "openapi": [
+    "openapi-spec/waves-api.yaml",
+    "openapi-spec/get-voices-openapi.yaml",
+    "openapi-spec/get-cloned-voices-openapi.yaml"
+  ]
 }

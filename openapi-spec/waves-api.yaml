@@ -45,7 +45,7 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "InvalidRequest"
+                error: 'InvalidRequest'
                 message: "The 'text' field is required."
         '401':
           description: Unauthorized.
@@ -61,8 +61,8 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "Unauthorized"
-                message: "Bearer token is missing or invalid."
+                error: 'Unauthorized'
+                message: 'Bearer token is missing or invalid.'
         '500':
           description: Server error occurred.
           content:
@@ -77,8 +77,8 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "InternalServerError"
-                message: "An unexpected error occurred."
+                error: 'InternalServerError'
+                message: 'An unexpected error occurred.'
 
   /api/v1/lightning-large/get_speech:
     post:
@@ -115,7 +115,7 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "InvalidRequest"
+                error: 'InvalidRequest'
                 message: "The 'text' field is required."
         '401':
           description: Unauthorized.
@@ -131,8 +131,8 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "Unauthorized"
-                message: "Bearer token is missing or invalid."
+                error: 'Unauthorized'
+                message: 'Bearer token is missing or invalid.'
         '500':
           description: Server error occurred.
           content:
@@ -147,8 +147,8 @@ paths:
                     type: string
                     description: Error message.
               example:
-                error: "InternalServerError"
-                message: "An unexpected error occurred."
+                error: 'InternalServerError'
+                message: 'An unexpected error occurred.'
 
 components:
   schemas:
@@ -192,6 +192,16 @@ components:
           minimum: 0.0
           maximum: 1.0
           default: 0.5
+        similarity:
+          type: number
+          description: This parameter controls the similarity between the generated speech and the reference audio. Increase it to make the speech more similar to the reference audio.
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.0
+        enhancement:
+          type: boolean
+          description: Enhances speech quality at the cost of increased latency.
+          default: false
 
   securitySchemes:
     bearerAuth:
