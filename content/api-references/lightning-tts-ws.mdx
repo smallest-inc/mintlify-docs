@@ -15,7 +15,7 @@ Connect to the WebSocket endpoint:
 
 ```javascript
 const ws = new WebSocket(
-  'wss://api.smallest.ai/api/v1/lightning/stream'
+  'wss://waves-api.smallest.ai/api/v1/lightning/get_speech/stream'
 );
 ```
 
@@ -25,7 +25,7 @@ Authentication is required. Include your API key in the connection headers:
 
 ```javascript
 const ws = new WebSocket(
-  'wss://api.smallest.ai/api/v1/lightning/stream',
+  'wss://waves-api.smallest.ai/api/v1/lightning/get_speech/stream',
   {
     headers: {
       Authorization: 'Bearer YOUR_API_KEY'
@@ -55,21 +55,6 @@ Send a JSON message with the following structure:
 | `voice_id`    | string | Yes      | ID of the voice to use                              |
 | `speed`       | number | No       | Speech speed multiplier (default: 1)                |
 | `sample_rate` | number | No       | Audio sample rate in Hz (default: 24000)            |
-
-### Try It Now
-
-<WebSocketPlayground
-  endpoint='wss://api.smallest.ai/api/v1/lightning/stream'
-  method='WebSocket'
-  requestFormat='json'
-  defaultBody={{
-    text: 'Hello world! This is a test of the Lightning TTS WebSocket API.',
-    voice_id: 'en_female_1',
-    speed: 1,
-    sample_rate: 24000
-  }}
-  responseFormat='audio'
-/>
 
 ### Response Format
 

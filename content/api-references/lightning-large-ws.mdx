@@ -15,7 +15,7 @@ Connect to the WebSocket endpoint:
 
 ```javascript
 const socket = new WebSocket(
-  'wss://api.smallest.ai/api/v1/lightning-large/stream'
+  'wss://waves-api.smallest.ai/api/v1/lightning-large/get_speech/stream'
 );
 ```
 
@@ -25,7 +25,7 @@ Authentication is required. Include your API key in the connection headers:
 
 ```javascript
 const socket = new WebSocket(
-  'wss://api.smallest.ai/api/v1/lightning-large/stream',
+  'wss://waves-api.smallest.ai/api/v1/lightning-large/get_speech/stream',
   {
     headers: {
       Authorization: 'Bearer YOUR_API_KEY'
