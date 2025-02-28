@@ -103,17 +103,11 @@
     },
     {
       "group": "Lightning",
-      "pages": [
-        "/content/api-references/lightning",
-        "/content/api-references/lightning-tts-ws"
-      ]
+      "pages": ["/content/api-references/lightning"]
     },
     {
       "group": "Lightning Large",
-      "pages": [
-        "/content/api-references/lightning-large",
-        "/content/api-references/lightning-large-ws"
-      ]
+      "pages": ["/content/api-references/lightning-large"]
     },
     {
       "group": "Voices",
