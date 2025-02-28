@@ -192,6 +192,17 @@ components:
           minimum: 0.0
           maximum: 1.0
           default: 0.5
+        similarity:
+          type: number
+          description: This parameter controls the similarity between the generated speech and the reference audio. Increase it to make the speech more similar to the reference audio.
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.0
+        enhancement:
+          type: boolean
+          description: Enhances speech quality at the cost of increased latency.
+          default: false
+
 
   securitySchemes:
     bearerAuth:
