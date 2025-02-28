@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Lightning Large API
+  version: 1.0.0
+paths:
+  /api/v1/lightning-large:
+    delete:
+      summary: Delete a voice clone
+      description: Deletes a voice clone associated with the authenticated user.
+      operationId: deleteVoiceClone
+      security:
+        - PublicAuth: []
+      tags:
+        - Voice Clone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voiceId:
+                  type: string
+                  description: The unique identifier of the voice clone to delete.
+              required:
+                - voiceId
+      responses:
+        '200':
+          description: Voice clone deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  voiceId:
+                    type: string
+        '400':
+          description: Bad request (Invalid voice ID or validation error)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: 'Invalid voice'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string
+                    example: 'Internal server error'
+components:
+  securitySchemes:
+    PublicAuth:
+      type: http
+      scheme: bearer
