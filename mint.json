@@ -97,8 +97,7 @@
     {
       "group": "API References",
       "pages": [
-        "/content/api-references/authentication",
-        "/content/api-references/websocket"
+        "/content/api-references/authentication"
       ]
     },
     {
