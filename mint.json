@@ -137,6 +137,8 @@
   "openapi": [
     "openapi-spec/waves-api.yaml",
     "openapi-spec/get-voices-openapi.yaml",
-    "openapi-spec/get-cloned-voices-openapi.yaml"
+    "openapi-spec/get-cloned-voices-openapi.yaml",
+    "openapi-spec/add-voice-openapi.yaml",
+    "openapi-spec/delete-cloned-voice-openapi.yaml"
   ]
 }

@@ -10,7 +10,7 @@ servers:
     description: Waves API server
 
 paths:
-  /api/v1/lightning-large/delete:
+  /api/v1/lightning-large:
     delete:
       summary: Delete a voice clone
       description: Deletes a voice clone associated with the authenticated user.
