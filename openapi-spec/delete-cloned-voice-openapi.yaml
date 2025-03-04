@@ -44,7 +44,7 @@ paths:
                     type: string
                     description: Voice ID of the deleted voice clone.
         '400':
-          description: Bad request or limit exceeded
+          description: Bad request (Invalid voice ID or validation error)
           content:
             application/json:
               schema:
