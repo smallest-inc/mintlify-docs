@@ -199,9 +199,11 @@ components:
           maximum: 1.0
           default: 0.0
         enhancement:
-          type: boolean
+          type: number
           description: Enhances speech quality at the cost of increased latency.
-          default: false
+          minimum: 0
+          maximum: 2
+          default: 1
 
   securitySchemes:
     bearerAuth:
