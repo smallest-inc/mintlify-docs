@@ -10,19 +10,11 @@ servers:
     description: Waves API server
 
 paths:
-  /api/v1/{model}/get_cloned_voices:
+  /api/v1/lightning-large/get_cloned_voices:
     get:
       summary: Get Voices
       description: Fetch your cloned voices.
       operationId: getWavesVoices
-      parameters:
-        - in: path
-          name: model
-          required: true
-          schema:
-            type: string
-            enum: [lightning-large]
-          description: The model to use for speech synthesis.
       responses:
         '200':
           description: Voices retrieved successfully.

@@ -75,6 +75,7 @@
         "/content/voice-cloning/types-of-clone",
         "/content/voice-cloning/how-to-vc-ui",
         "/content/voice-cloning/how-to-vc",
+        "/content/voice-cloning/how-to-delete-vc",
         "/content/voice-cloning/how-to-pvc"
       ]
     },
@@ -136,6 +137,8 @@
   "openapi": [
     "openapi-spec/waves-api.yaml",
     "openapi-spec/get-voices-openapi.yaml",
-    "openapi-spec/get-cloned-voices-openapi.yaml"
+    "openapi-spec/get-cloned-voices-openapi.yaml",
+    "openapi-spec/add-voice-openapi.yaml",
+    "openapi-spec/delete-cloned-voice-openapi.yaml"
   ]
 }

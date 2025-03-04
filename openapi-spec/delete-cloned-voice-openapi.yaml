@@ -1,7 +1,14 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Lightning Large API
+  title: Waves API
+  description: |
+    API for the new Waves text-to-speech model.
+    Currently featuring our two models, Lightning & Lightning Large, with more models coming soon.
   version: 1.0.0
+servers:
+  - url: https://waves-api.smallest.ai
+    description: Waves API server
+
 paths:
   /api/v1/lightning-large:
     delete:
@@ -9,9 +16,7 @@ paths:
       description: Deletes a voice clone associated with the authenticated user.
       operationId: deleteVoiceClone
       security:
-        - PublicAuth: []
-      tags:
-        - Voice Clone
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -34,9 +39,10 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    example: true
+                    description: Status if the voice clone was deleted successfully.
                   voiceId:
                     type: string
+                    description: Voice ID of the deleted voice clone.
         '400':
           description: Bad request (Invalid voice ID or validation error)
           content:
@@ -44,24 +50,43 @@ paths:
               schema:
                 type: object
                 properties:
-                  errors:
+                  error:
                     type: string
-                    example: 'Invalid voice'
-        '500':
-          description: Internal server error
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  success:
-                    type: boolean
-                    example: false
                   error:
                     type: string
-                    example: 'Internal server error'
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Server error occurred
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type
+                  message:
+                    type: string
+                    description: Error message
+
 components:
   securitySchemes:
-    PublicAuth:
+    BearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
