@@ -180,6 +180,13 @@ components:
           minimum: 0.5
           maximum: 2.0
           default: 1.0
+        language:
+          type: string
+          description: Determines how numbers are spelled out. If set to 'en', numbers will be read as individual digits in English. If set to 'hi', numbers will be read as individual digits in Hindi.
+          default: 'en'
+          enum:
+            - en
+            - hi
 
     LightningLargeRequest:
       type: object
