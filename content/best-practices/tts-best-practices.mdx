@@ -68,12 +68,17 @@ To optimize real-time processing and reduce latency, implement these chunking pr
 ### Chunking Implementation
 
 Use the following Python code for implementing text chunking:
+- For `lightning-large` model, set `max_chunk_size=140`.
+- For `lightning` model, set `max_chunk_size=250`. 
 
 <CodeGroup>
 ```python python
 def chunk_text(text, max_chunk_size=250):
     """
     Chunks text with a maximum size of 250 characters, preferring to break at punctuation marks.
+
+    - For `lightning-large` model, set `max_chunk_size=140`.
+    - For `lightning` model, set `max_chunk_size=250`. 
     
     Args:
         text (str): Input text to be chunked
