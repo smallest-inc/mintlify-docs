@@ -19,6 +19,6 @@ The Lightning-Large SSE API provides real-time text-to-speech streaming capabili
 ## How It Works
 
 1. **Make a POST Request**: Send your text and voice settings to the API endpoint
-2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks
+2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks with 1024 byte size
 3. **Process the Stream**: Handle the SSE events to decode and play audio chunks sequentially
 4. **End of Stream**: The API sends a completion event when all audio has been delivered
