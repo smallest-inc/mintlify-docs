@@ -150,6 +150,78 @@ paths:
                 error: 'InternalServerError'
                 message: 'An unexpected error occurred.'
 
+  /api/v1/lightning-large/stream:
+    post:
+      summary: Generate speech from text (Lightning Large)
+      description: Converts provided text to speech using the Lightning Large model.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LightningLargeRequest'
+      responses:
+        '200':
+          description: Synthesized speech retrieved successfully.
+          content:
+            text/event-stream:
+              example:
+                data: |
+                  event: chunk
+                  data: <WAV_DATA>
+                  done: false
+
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InvalidRequest'
+                message: "The 'text' field is required."
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'Unauthorized'
+                message: 'Bearer token is missing or invalid.'
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InternalServerError'
+                message: 'An unexpected error occurred.'
+
 components:
   schemas:
     LightningRequest:
