@@ -97,9 +97,7 @@
     },
     {
       "group": "API References",
-      "pages": [
-        "/content/api-references/authentication"
-      ]
+      "pages": ["/content/api-references/authentication"]
     },
     {
       "group": "Lightning",
@@ -107,7 +105,10 @@
     },
     {
       "group": "Lightning Large",
-      "pages": ["/content/api-references/lightning-large"]
+      "pages": [
+        "/content/api-references/lightning-large",
+        "/content/api-references/lightning-large-stream"
+      ]
     },
     {
       "group": "Voices",
