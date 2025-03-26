@@ -88,6 +88,10 @@
       ]
     },
     {
+      "group": "Product",
+      "pages": ["/content/product/projects"]
+    },
+    {
       "group": "Best Practices",
       "pages": [
         "/content/best-practices/vc-best-practices",
