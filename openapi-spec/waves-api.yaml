@@ -259,6 +259,10 @@ components:
           enum:
             - en
             - hi
+            - ta
+            - fr
+            - de
+            - pl
 
     LightningLargeRequest:
       type: object
