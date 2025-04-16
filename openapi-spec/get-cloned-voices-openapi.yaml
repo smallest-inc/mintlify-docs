@@ -12,9 +12,11 @@ servers:
 paths:
   /api/v1/lightning-large/get_cloned_voices:
     get:
+      tags:
+        - Voice Cloning
       summary: Get Voices
       description: Fetch your cloned voices.
-      operationId: getWavesVoices
+      operationId: getClonedVoices
       responses:
         '200':
           description: Voices retrieved successfully.
@@ -28,6 +30,9 @@ paths:
                     description: List of available voices.
                     items:
                       type: object
+                      required:
+                        - voiceId
+                        - displayName
                       properties:
                         displayName:
                           type: string

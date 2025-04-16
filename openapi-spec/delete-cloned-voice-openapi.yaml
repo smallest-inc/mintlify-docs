@@ -12,6 +12,8 @@ servers:
 paths:
   /api/v1/lightning-large:
     delete:
+      tags:
+        - Voice Cloning
       summary: Delete a voice clone
       description: Deletes a voice clone associated with the authenticated user.
       operationId: deleteVoiceClone
@@ -36,6 +38,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - voiceId
                 properties:
                   success:
                     type: boolean
