@@ -12,6 +12,8 @@ servers:
 paths:
   /api/v1/lightning-large/add_voice:
     post:
+      tags:
+        - Voice Cloning
       summary: Add a new voice to the model
       description: Instantly clone a voice by uploading an audio file for the specified model.
       operationId: addVoiceToModel
@@ -20,7 +22,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
@@ -57,6 +59,10 @@ paths:
                       status:
                         type: string
                         description: Status of the voice creation.
+                    required:
+                      - voiceId
+                      - model
+                      - status
         '400':
           description: Bad request or limit exceeded
           content:

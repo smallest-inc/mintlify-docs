@@ -12,6 +12,8 @@ servers:
 paths:
   /api/v1/{model}/get_voices:
     get:
+      tags:
+        - Voices
       summary: Get Voices
       description: Fetch voices for a given model.
       operationId: getWavesVoices
@@ -36,6 +38,9 @@ paths:
                     description: List of available voices.
                     items:
                       type: object
+                      required:
+                        - voiceId
+                        - displayName
                       properties:
                         voiceId:
                           type: string
@@ -44,10 +49,20 @@ paths:
                           type: string
                           description: Display name for the voice.
                         tags:
-                          type: array
+                          type: object
                           description: List of tags associated with the voice.
-                          items:
-                            type: string
+                          properties:
+                            language:
+                              type: array
+                              description: Language of the voice.
+                              items:
+                                type: string
+                            accent:
+                              type: string
+                              description: Accent of the voice.
+                            gender:
+                              type: string
+                              description: Gender of the voice.
         '400':
           description: Bad request
           content:

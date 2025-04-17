@@ -12,6 +12,9 @@ servers:
 paths:
   /api/v1/lightning/get_speech:
     post:
+      tags:
+        - Lightning
+      operationId: synthesizeLightningSpeech
       summary: Generate speech from text (Lightning)
       description: Converts provided text to speech using the Lightning model.
       security:
@@ -82,6 +85,9 @@ paths:
 
   /api/v1/lightning-large/get_speech:
     post:
+      tags:
+        - Lightning Large
+      operationId: synthesizeLightningLargeSpeech
       summary: Generate speech from text (Lightning Large)
       description: Converts provided text to speech using the Lightning Large model.
       security:
@@ -152,6 +158,9 @@ paths:
 
   /api/v1/lightning-large/stream:
     post:
+      tags:
+        - Lightning Large
+      operationId: streamLightningLargeSpeech
       summary: Generate speech from text (Lightning Large)
       description: Converts provided text to speech using the Lightning Large model.
       security:
