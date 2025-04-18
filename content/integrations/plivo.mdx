@@ -26,6 +26,8 @@ Start by creating a `.env` file in your project directory with the necessary API
 SMALLEST_API_KEY=...
 PLIVO_AUTH_ID=...
 PLIVO_AUTH_TOKEN=...
+PLIVO_FROM_NUMBER=...
+PLIVO_TO_NUMBER=...
 ```
 
 ### 2. Set Up Ngrok
@@ -46,6 +48,7 @@ ngrok http 5000
 To run the example code, you’ll need to install the required dependencies. Run the following command:
 
 ```bash
+cd lightning/telephone_example
 pip install -r requirements.txt
 ```
 
