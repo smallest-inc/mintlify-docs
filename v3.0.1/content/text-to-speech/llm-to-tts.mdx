@@ -1,0 +1,138 @@
+---
+title: "How to stream LLM to TTS in Realtime"
+description: "Learn how to convert streaming Text to Speech in Realtime."
+icon: "bars-staggered"
+---  
+
+## Synthesize streaming Text to Speech
+
+The `TextToAudioStream` class provides real-time text-to-speech (TTS) conversion by streaming text directly into audio output. This feature is particularly useful in applications that require instant feedback, such as voice assistants, live captioning systems, or interactive chatbots, where text is continuously generated and needs to be converted into speech on-the-fly.
+
+This example demonstrates how to stream text from a large language model (LLM) and process it into speech, utilizing the `TextToAudioStream` class with both synchronous and asynchronous TTS engines.  
+
+### Example Overview
+
+In this example, text is generated using an LLM (Groq in this case, you can use any LLM), and the generated text is then passed to a TTS system (Smallest API) for real-time audio synthesis. The audio is saved as a `.wav` file. This entire process happens asynchronously to ensure smooth performance, especially when dealing with large or continuous streams of text.
+
+### Code Walkthrough
+#### Stream through a WebSocket
+<CodeGroup>
+```python python
+import asyncio
+import websockets
+from groq import Groq
+from smallestai.waves import WavesClient, TextToAudioStream  
+
+# Initialize Groq (LLM) and Smallest (TTS) instances
+llm = Groq(api_key="GROQ_API_KEY")
+tts = WavesClient(api_key="SMALLEST_API_KEY")
+WEBSOCKET_URL = "wss://echo.websocket.events" # Mock WebSocket server
+
+# Async function to stream text generation from LLM
+async def generate_text(prompt):
+    completion = llm.chat.completions.create(
+        messages=[{"role": "user", "content": prompt}],
+        model="llama3-8b-8192",
+        stream=True,
+    )
+
+    # Yield text as it is generated
+    for chunk in completion:
+        text = chunk.choices[0].delta.content
+        if text:
+            yield text
+
+# Main function to run the process
+async def main():
+    # Initialize the TTS processor
+    processor = TextToAudioStream(tts_instance=tts)
+
+    # Generate text from LLM
+    llm_output = generate_text("Explain text to speech like I am five in 5 sentences.")
+
+    # Stream the generated speech throught a websocket
+    async with websockets.connect(WEBSOCKET_URL) as ws:
+        print("Connected to WebSocket server.")
+
+        # Stream the generated speech
+        async for audio_chunk in processor.process(llm_output):
+            await ws.send(audio_chunk)  # Send audio chunk
+            echoed_data = await ws.recv()  # Receive the echoed message
+            print("Received from server:", echoed_data[:20], "...")  # Print first 20 bytes
+
+        print("WebSocket connection closed.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+</CodeGroup>
+
+#### Saving to a file
+<CodeGroup>
+```python python
+import wave
+import asyncio
+from groq import Groq
+from smallestai.waves import WavesClient, TextToAudioStream
+
+# Initialize Groq (LLM) and Smallest (TTS) instances
+llm = Groq(api_key="GROQ_API_KEY")
+tts = WavesClient(api_key="SMALLEST_API_KEY")
+
+# Async function to stream text generation from LLM
+async def generate_text(prompt):
+    completion = llm.chat.completions.create(
+        messages=[{"role": "user", "content": prompt}],
+        model="llama3-8b-8192",
+        stream=True,
+    )
+
+    # Yield text as it is generated
+    for chunk in completion:
+        text = chunk.choices[0].delta.content
+        if text:
+            yield text
+
+# Async function to save generated audio as a WAV file
+async def save_audio_to_wav(file_path, processor, llm_output):
+    with wave.open(file_path, "wb") as wav_file:
+        wav_file.setnchannels(1)       # Mono audio
+        wav_file.setsampwidth(2)       # 16-bit samples
+        wav_file.setframerate(24000)   # 24 kHz sample rate
+        
+        # Process audio chunks and write them to the WAV file
+        async for audio_chunk in processor.process(llm_output):
+            wav_file.writeframes(audio_chunk)
+
+# Main asynchronous function to run the process
+async def main():
+    # Initialize the TTS processor
+    processor = TextToAudioStream(tts_instance=tts)
+    
+    # Generate text asynchronously
+    llm_output = generate_text("Explain text to speech like I am five in 5 sentences.")
+    
+    # Save the generated speech to a WAV file
+    await save_audio_to_wav("llm_to_speech.wav", processor, llm_output)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+</CodeGroup>
+
+### Parameters
+
+- `tts_instance`: The instance of the TTS engine (either `Smallest` or `AsyncSmallest`) used to generate speech from the text.
+- `queue_timeout`: The wait time (in seconds) for new text to be received before attempting to generate speech. Default is 5.0 seconds.
+- `max_retries`: The maximum number of retries for failed synthesis attempts. Default is 3.
+
+### Output Format   
+
+The `TextToAudioStream` processor streams raw audio data without WAV headers for better streaming efficiency. These raw audio chunks can be:
+
+- Played directly through an audio device for real-time feedback.
+- Saved to a file (e.g., `.wav` or `.mp3`) for later use.
+- Streamed over a network to a client device or service.
+- Further processed for additional applications, such as speech analytics or audio effects.
+
+This approach allows you to handle continuous streams of text and convert them into real-time speech, making it ideal for interactive applications where immediate audio feedback is crucial.

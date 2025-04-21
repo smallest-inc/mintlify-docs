@@ -1,0 +1,108 @@
+---
+title: "Telephony: Plivo"
+description: "Learn how to integrate Smallest AI TTS in Plivo for telephony solutions."
+icon: "phone-volume"
+---
+
+This guide demonstrates how to use the **Smallest AI API** with telephony call functionality. It sets up a local FastAPI server to stream audio data and uses **ngrok** to expose the server to the public for testing.    
+
+You can access the code for this example on GitHub [here <Icon icon="arrow-up-right-from-square" iconType="solid" />](https://github.com/smallest-inc/waves-examples/tree/main/lightning/telephone_example/plivo_example).
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+- **Python 3.8+** installed
+- **ngrok** for tunneling local servers to the internet. You can download ngrok from [here](https://ngrok.com/download).
+- **Plivo** account to handle calls and text-to-speech.
+
+## Setup Steps
+
+### 1. Configure Environment Variables
+
+Start by creating a `.env` file in your project directory with the necessary API keys. This configuration is essential for interacting with **Smallest.ai** and **Plivo**.
+
+```bash
+SMALLEST_API_KEY=...
+PLIVO_AUTH_ID=...
+PLIVO_AUTH_TOKEN=...
+```
+
+### 2. Set Up Ngrok
+
+**Ngrok** is used to expose your local FastAPI server to the public internet. Follow these steps:
+
+1. Install **ngrok** (if not already installed).
+2. Expose your FastAPI server for Plivo by running:
+
+```bash
+ngrok http 5000
+```
+
+3. Once ngrok is running, it will generate a public URL (e.g., `https://abcd-1234-5678.ngrok.io`).
+
+### 3. Install Dependencies
+
+To run the example code, you’ll need to install the required dependencies. Run the following command:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the FastAPI Application
+
+Now, you can start the FastAPI server, which will handle the streaming of audio.
+
+**Note**: Make sure to update the ngrok URL and paths in the script before running.
+
+Run the Plivo server:
+```bash
+python plivo_example/plivo_app.py
+```
+
+### 5. Run the Phonetic Call Client
+
+Now that the FastAPI server is up and running, it's time to make a phonetic call. This client connects to the server, and you can test the audio stream with the desired telephony platform.
+
+
+Similarly, update the phone numbers and ngrok URL in the script, then run:
+
+```bash
+python plivo_example/plivo_make_call.py
+```
+
+### 6. Testing the Call
+
+- Once the client script is executed, a call will be placed to the provided number with phonetic audio.
+- Plivo will handle the audio and make the call based on the provided parameters.
+  
+### 7. Accessing the Public URL
+
+If you’ve successfully run ngrok, your application will be accessible via a public URL provided by ngrok, such as `https://abcd-1234-5678.ngrok.io`.
+
+This public URL will allow external services like Plivo to interact with your server.
+
+---
+
+## Notes
+
+- **Public URL Requirement:** If you already have a public URL (e.g., from deploying the app), you don't need to use ngrok.
+- **API Keys:** Ensure your `.env` file contains all required keys for **Plivo** to ensure successful API calls.
+- **Phone Numbers:** Update the client scripts with valid phone numbers to receive the call.
+- **Testing:** Use ngrok for easy testing in a local environment before deploying the application.
+
+---
+
+## Troubleshooting
+
+If you face any issues during setup or while making calls, ensure the following:
+
+- **Correct API keys**: Double-check the credentials in your `.env` file.
+- **Ngrok URL**: Ensure that ngrok is running and the correct URL is used in the scripts.
+- **Dependencies**: Ensure all dependencies are installed correctly via `pip install -r requirements.txt`.
+
+If issues persist, you can reach out to the [Smallest.ai support team](https://discord.gg/Ub25S48hSf) or raise an issue on the [GitHub repository](https://github.com/smallest-inc/waves-examples).
+
+---
+
+This setup provides seamless testing of phonetic calls using the **Smallest AI API** and **Plivo** for real-time voice interaction.

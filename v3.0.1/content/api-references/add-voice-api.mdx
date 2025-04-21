@@ -1,0 +1,37 @@
+---
+title: "Add your Voice"
+description: "Add your voice using the Waves API."
+openapi: "POST /api/v1/lightning-large/add_voice"
+hideApiMarker: False
+---
+
+> **Note:** The Mintlify web UI currently does not correctly upload files in the API request. Below, we have provided code examples in Python and curl to help you test the API.
+
+## Sample cURL Example
+```bash
+curl -X POST https://waves-api.smallest.ai/api/v1/lightning-large/add_voice \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -F "displayName=my voice" \
+    -F "file=@my_voice.wav;type=audio/wav"
+```
+## Sample Code Example
+
+Here is a Python example using the `requests` library:
+<CodeGroup>
+```python python
+import requests
+url = "https://waves-api.smallest.ai/api/v1/lightning-large/add_voice"
+payload = {'displayName': 'my voice'}
+files=[
+  ('file', ('my_voice.wav', open('my_voice.wav','rb'), 'audio/wav'))
+]
+headers = {
+  'Authorization': 'Bearer YOUR_API_KEY'
+}
+response = requests.request("POST", url, headers=headers, data=payload, files=files)
+print(response.text)
+```
+</CodeGroup>
+
+Replace `YOUR_API_KEY` with your actual API key and `example.wav` with the path to your audio file.
+

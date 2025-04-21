@@ -1,0 +1,113 @@
+---
+title: "LiveKit"
+description: "Build LiveKit voice agents using Smallest AI TTS plugin."
+icon: "voicemail"
+---
+
+This example provides scripts and tools to perform standalone audio generation and build Livekit voice assistants using the Smallest AI TTS plugin. Follow the steps below to set up and run the experiments.
+
+## Code Examples Repository
+
+You can find the code examples for this setup in the following GitHub repository:
+
+[Livekit Example Code Repository](https://github.com/smallest-inc/waves-examples/tree/main/lightning/livekit_example)
+
+## Common Steps
+
+### 1. Create a Virtual Environment
+
+To ensure your Python environment is isolated, create a virtual environment:
+
+```bash
+python3 -m venv venv
+```
+
+Activate the virtual environment:
+
+- On Linux/Mac:
+  ```bash
+  source venv/bin/activate
+  ```
+
+- On Windows:
+  ```bash
+  venv\Scripts\activate
+  ```
+
+### 2. Install Requirements
+
+Once the virtual environment is activated, install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Sign in and Create a New Project on Livekit
+
+Sign in here: [Livekit Cloud](https://cloud.livekit.io)
+
+After signing in, create a new project and copy the following tokens:
+
+```bash
+LIVEKIT_API_KEY
+LIVEKIT_API_SECRET
+LIVEKIT_URL
+```
+
+### 4. Create a `.env` File
+
+Create a `.env` file in the project root directory. This file should contain the following keys with appropriate values:
+
+```bash
+LIVEKIT_API_KEY=...
+LIVEKIT_API_SECRET=...
+LIVEKIT_URL=...
+OPENAI_API_KEY=...
+DEEPGRAM_API_KEY=...
+SMALLEST_API_KEY=...
+```
+
+### 5. Install the Plugin
+
+To set up the Livekit plugin for [smallest.ai](https://smallest.ai), run the following commands:
+
+```bash
+chmod +x install_plugin.sh
+./install_plugin.sh
+```
+
+---
+
+## Usage
+
+### 1. Running `generate_audio.py`
+
+To generate audio using the Smallest AI plugin as a WAV file, run the following command:
+
+```bash
+python3 generate_audio.py
+```
+
+You can change the parameters in the script and try out different voices, languages, and texts.
+
+### 2. Running `minimal_assistant.py`
+
+To build a minimal Livekit voice assistant using the Smallest model, run the following command:
+
+```bash
+python3 minimal_assistant.py dev
+```
+
+### 3. Connect to the Agent Here
+
+You can connect to the agent by visiting the following link:
+
+[Livekit Agent Playground](https://agents-playground.livekit.io)
+
+---
+
+## Notes
+
+- Ensure that you have added the correct API keys and other credentials in the `.env` file before running the scripts.
+- For any issues or questions, feel free to open an issue in the repository or contact us on [Discord](https://discord.gg/Ub25S48hSf).
+
