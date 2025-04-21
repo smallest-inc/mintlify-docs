@@ -1,0 +1,71 @@
+---
+title: "Get available Voices, Models and Languages"
+description: "Learn how to retrieve available voices, models, and languages."
+icon: "toolbox"
+--- 
+
+In this tutorial, you will learn how to use the Smallest AI platform to fetch the available languages, models, and voices. By the end of this guide, you'll be able to retrieve and display this information using the Smallest AI SDK.
+
+## Requirements
+
+Before you begin, ensure you have the following:
+
+- Python (3.9 or higher) installed on your machine.  
+- An API key from the Smallest AI platform (sign up [here](https://waves.smallest.ai)).  
+- The Smallest AI Python SDK installed. If you haven't installed it yet, follow the instructions below:
+
+### Install the SDK
+```bash
+pip install smallestai
+```
+
+Set your API key as an environment variable:  
+```bash
+export SMALLEST_API_KEY=YOUR_API_KEY
+```
+
+## Fetch Available Voices, Models, and Languages
+
+The Smallest AI SDK allows you to query the available languages, voices, and models for your TTS needs. Here's how you can do it:  
+
+<CodeGroup>
+```python python
+from smallestai.waves import WavesClient
+
+def main():
+    client = WavesClient(api_key="YOUR_API_KEY")
+    
+    # Get available languages
+    languages = client.get_languages()
+    print(f"Available Languages: {languages}")
+    
+    # Get available voices for the "lightning" model, alternatively `lightning-large`
+    voices = client.get_voices(model="lightning")
+    print(f"Available Voices (Model: 'lightning'): {voices}")
+    
+    # Get user-specific cloned voices
+    cloned_voices = client.get_cloned_voices()
+    print(f"Available Cloned Voices: {cloned_voices}")
+    
+    # Get available models
+    models = client.get_models()
+    print(f"Available Models: {models}")
+
+if __name__ == "__main__":
+    main()
+```
+</CodeGroup>
+
+## Explanation of Functions
+
+- `get_languages()`: Retrieves the list of supported languages for Text-to-Speech.  
+- `get_voices(model="model_name")`: Retrieves the voices available for a specific model (e.g., "lightning").  
+- `get_cloned_voices()`: Fetches all user-specific cloned voices.  
+- `get_models()`: Retrieves the TTS models on the platform available through API.  
+
+
+## Need Help?
+
+If you have any questions or encounter issues, our community is here to help!  
+- Join our [Discord server](https://discord.gg/ywShEyXHBW) to connect with other developers and get real-time support.  
+- Contact us via email: [support@smallest.ai](mailto:support@smallest.ai).  

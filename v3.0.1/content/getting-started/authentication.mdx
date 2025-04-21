@@ -1,0 +1,44 @@
+---
+title: "Authentication"
+description: "Learn how to authenticate your API requests and manage access keys securely."
+icon: "lock"
+---
+
+## API keys
+Smallest AI uses API keys for authentication. You must include your key with every API request to authenticate your identity and track usage against your quota.
+
+Each API key can be scoped to the following:
+
+- **Rate Limits**: Controls the number of requests allowed within a specified time period.
+- **Credit Quota**: Defines the maximum usage credits available for your account.
+
+Your API key is confidential and should be kept secure. Never share it with others or expose it in client-side code (browsers, mobile apps, github repositories, etc.).
+
+## Making Requests
+All API requests require your key in the `Authorization` header using the Bearer key format:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Example API Request
+Test the API with this curl command by replacing `YOUR_API_KEY` with your actual key:
+
+```bash
+curl 'https://waves-api.smallest.ai/api/v1/lightning/get_voices' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+
+## Example with the Smallest Python Package
+<CodeGroup>
+```python python
+from smallestai.waves import WavesClient
+
+# Initialize the client with your API key
+client = WavesClient(api_key="YOUR_API_KEY")
+
+# Retrieve available voices
+print(f"Available Voices: {client.get_voices(model='lightning')}")
+```
+</CodeGroup>

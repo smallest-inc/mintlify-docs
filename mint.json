@@ -34,105 +34,245 @@
       "url": "https://smallest.ai/blog"
     }
   ],
+  "versions": [
+    {
+      "name": "v3.0.1",
+      "default": true
+    },
+    {
+      "name": "v2.2.0"
+    }
+  ],
   "tabs": [
     {
       "name": "API Reference",
-      "url": "/content/api-references"
+      "version": "v2.2.0",
+      "url": "/v2.2.0/content/api-references"
+    },
+    {
+      "name": "API Reference",
+      "version": "v3.0.1",
+      "url": "/v3.0.1/content/api-references"
     },
     {
       "name": "Client Libraries",
-      "url": "/content/client-libraries"
+      "version": "v2.2.0",
+      "url": "/v2.2.0/content/client-libraries"
+    },
+    {
+      "name": "Client Libraries",
+      "version": "v3.0.1",
+      "url": "/v3.0.1/content/client-libraries"
     },
     {
       "name": "Changelog",
-      "url": "/content/changelog"
+      "version": "v2.2.0",
+      "url": "/v2.2.0/content/changelog"
+    },
+    {
+      "name": "Changelog",
+      "version": "v3.0.1",
+      "url": "/v3.0.1/content/changelog"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
-      "pages": ["/content/introduction/introduction"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/introduction/introduction"]
+    },
+    {
+      "group": "Introduction",
+      "version": "v3.0.1", 
+      "pages": ["/v3.0.1/content/introduction/introduction"]
     },
     {
       "group": "Getting Started",
+      "version": "v2.2.0",
       "pages": [
-        "/content/getting-started/quickstart",
-        "/content/getting-started/models",
-        "/content/getting-started/authentication"
+        "/v2.2.0/content/getting-started/quickstart",
+        "/v2.2.0/content/getting-started/models",
+        "/v2.2.0/content/getting-started/authentication"
+      ]
+    },
+    {
+      "group": "Getting Started",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/getting-started/quickstart",
+        "/v3.0.1/content/getting-started/models",
+        "/v3.0.1/content/getting-started/authentication"
       ]
     },
     {
       "group": "Text to Speech",
+      "version": "v2.2.0",
       "pages": [
-        "/content/text-to-speech/how-to-tts",
-        "/content/text-to-speech/llm-to-tts",
-        "/content/text-to-speech/get-voice-models-langs"
+        "/v2.2.0/content/text-to-speech/how-to-tts",
+        "/v2.2.0/content/text-to-speech/llm-to-tts",
+        "/v2.2.0/content/text-to-speech/get-voice-models-langs"
+      ]
+    },
+    {
+      "group": "Text to Speech",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/text-to-speech/how-to-tts",
+        "/v3.0.1/content/text-to-speech/llm-to-tts",
+        "/v3.0.1/content/text-to-speech/get-voice-models-langs"
       ]
     },
     {
       "group": "Voice Cloning",
+      "version": "v2.2.0",
       "pages": [
-        "/content/voice-cloning/types-of-clone",
-        "/content/voice-cloning/how-to-vc-ui",
-        "/content/voice-cloning/how-to-vc",
-        "/content/voice-cloning/how-to-delete-vc",
-        "/content/voice-cloning/how-to-pvc"
+        "/v2.2.0/content/voice-cloning/types-of-clone",
+        "/v2.2.0/content/voice-cloning/how-to-vc-ui",
+        "/v2.2.0/content/voice-cloning/how-to-vc",
+        "/v2.2.0/content/voice-cloning/how-to-delete-vc",
+        "/v2.2.0/content/voice-cloning/how-to-pvc"
+      ]
+    },
+    {
+      "group": "Voice Cloning",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/voice-cloning/types-of-clone",
+        "/v3.0.1/content/voice-cloning/how-to-vc-ui",
+        "/v3.0.1/content/voice-cloning/how-to-vc",
+        "/v3.0.1/content/voice-cloning/how-to-delete-vc",
+        "/v3.0.1/content/voice-cloning/how-to-pvc"
       ]
     },
     {
       "group": "Integrations",
+      "version": "v2.2.0",
       "pages": [
-        "/content/integrations/livekit",
-        "/content/integrations/plivo",
-        "/content/integrations/vonage"
+        "/v2.2.0/content/integrations/livekit",
+        "/v2.2.0/content/integrations/plivo",
+        "/v2.2.0/content/integrations/vonage"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/integrations/livekit",
+        "/v3.0.1/content/integrations/plivo",
+        "/v3.0.1/content/integrations/vonage"
       ]
     },
     {
       "group": "Product",
-      "pages": ["/content/product/projects"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/product/projects"]
+    },
+    {
+      "group": "Product",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/product/projects"]
     },
     {
       "group": "Best Practices",
+      "version": "v2.2.0",
       "pages": [
-        "/content/best-practices/vc-best-practices",
-        "/content/best-practices/pvc-best-practices",
-        "/content/best-practices/tts-best-practices"
+        "/v2.2.0/content/best-practices/vc-best-practices",
+        "/v2.2.0/content/best-practices/pvc-best-practices",
+        "/v2.2.0/content/best-practices/tts-best-practices"
+      ]
+    },
+    {
+      "group": "Best Practices",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/best-practices/vc-best-practices",
+        "/v3.0.1/content/best-practices/pvc-best-practices",
+        "/v3.0.1/content/best-practices/tts-best-practices"
       ]
     },
     {
       "group": "API References",
-      "pages": ["/content/api-references/authentication"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/api-references/authentication"]
+    },
+    {
+      "group": "API References",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/api-references/authentication"]
     },
     {
       "group": "Lightning",
-      "pages": ["/content/api-references/lightning"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/api-references/lightning"]
+    },
+    {
+      "group": "Lightning",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/api-references/lightning"]
     },
     {
       "group": "Lightning Large",
+      "version": "v2.2.0",
       "pages": [
-        "/content/api-references/lightning-large",
-        "/content/api-references/lightning-large-stream"
+        "/v2.2.0/content/api-references/lightning-large",
+        "/v2.2.0/content/api-references/lightning-large-stream"
+      ]
+    },
+    {
+      "group": "Lightning Large",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/api-references/lightning-large",
+        "/v3.0.1/content/api-references/lightning-large-stream"
       ]
     },
     {
       "group": "Voices",
-      "pages": ["/content/api-references/get-voices-api"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/api-references/get-voices-api"]
+    },
+    {
+      "group": "Voices",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/api-references/get-voices-api"]
     },
     {
       "group": "Voice Cloning",
+      "version": "v2.2.0",
       "pages": [
-        "/content/api-references/add-voice-api",
-        "/content/api-references/get-cloned-voices-api",
-        "/content/api-references/delete-cloned-voice"
+        "/v2.2.0/content/api-references/add-voice-api",
+        "/v2.2.0/content/api-references/get-cloned-voices-api",
+        "/v2.2.0/content/api-references/delete-cloned-voice"
+      ]
+    },
+    {
+      "group": "Voice Cloning",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/api-references/add-voice-api",
+        "/v3.0.1/content/api-references/get-cloned-voices-api",
+        "/v3.0.1/content/api-references/delete-cloned-voice"
       ]
     },
     {
       "group": "Client Libraries",
-      "pages": ["/content/client-libraries/overview"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/client-libraries/overview"]
+    },
+    {
+      "group": "Client Libraries",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/client-libraries/overview"]
     },
     {
       "group": "Changelog",
-      "pages": ["/content/changelog/announcements"]
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/changelog/announcements"]
+    },
+    {
+      "group": "Changelog",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/changelog/announcements"]
     }
   ],
   "footerSocials": {

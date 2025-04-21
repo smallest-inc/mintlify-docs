@@ -1,0 +1,56 @@
+---
+title: "Quickstart"
+description: "Welcome to the Smallest AI platform! This guide will help you get started quickly with generating your first text-to-speech using Python and Smallest AI API.  "
+icon: "rocket"
+---
+   
+## Step 1: Sign Up & get the API Key  
+
+1. Visit [waves.smallest.ai](https://waves.smallest.ai/) and sign up for an account or log in if you already have an account.  
+2. Navigate to `API Key` tab in your account dashboard.
+3. Create a new API Key and copy it.
+4. Export the API Key in your environment with the name `SMALLEST_API_KEY`, ensuring that your application can access it securely for authentication.  
+
+## Step 2: Install the SDK
+
+To install the latest version available   
+```bash
+pip install smallestai
+```  
+When using an SDK in your application, make sure to pin to at least the major version (e.g., ==1.*). This helps ensure your application remains stable and avoids potential issues from breaking changes in future updates.  
+
+## Step 3: Make Your First API Call
+Here is a basic example of how to use the Python SDK to convert text to speech:  
+
+<CodeGroup>
+```python python
+from smallest import Smallest
+
+def main():
+    client = Smallest(api_key="YOUR_API_KEY")
+    client.synthesize(
+        "Modern problems require modern solutions.",
+        sample_rate=24000,
+        speed=1.0,
+        save_as="output.wav"
+    )
+
+if __name__ == "__main__":
+    main()
+```
+</CodeGroup>  
+
+Replace `YOUR_API_KEY` with the API key you obtained in Step 2.  
+
+## Step 4: Explore More Features
+
+- **Voice Cloning:** Create custom voice profiles by uploading voice samples.
+- **Advanced Configurations:** Customize speech synthesis with different voices, speeds, and sample rates.  
+
+For detailed documentation on all available features and endpoints, visit our API Reference.  
+
+### Need Help?
+If you have any questions or need assistance, please contact our support team at [support@smallest.ai](mailto:support@smallest.ai).
+
+
+

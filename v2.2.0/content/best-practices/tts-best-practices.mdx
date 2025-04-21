@@ -1,0 +1,333 @@
+---
+title: "Text to Speech - Best Practices"
+description: "Learn best practices for text formatting for optimal Audio Generation."
+icon: "comment-dots"
+---
+
+This comprehensive guide outlines the recommended practices for formatting text to ensure optimal processing, accuracy, and consistent output across different use cases. Following these guidelines will help improve the quality of generated audio and reduce potential errors.
+
+## Language and Script Guidelines
+
+### Mixed Language Formatting
+
+When working with mixed language content, particularly English and Hindi, proper script selection is crucial for accurate processing:
+
+- English text must be written in Latin script
+- Hindi text must be written in Devanagari script
+- Avoid transliteration of Hindi words into Latin script
+
+**Examples:**
+```
+✅ Correct: I want to eat खाना
+❌ Incorrect: I want to eat khana
+
+✅ Correct: मैं school जाता हूं
+❌ Incorrect: main school jata hun
+```
+
+### Proper Nouns Handling
+
+For Indian proper nouns, maintain cultural and linguistic accuracy by following these rules:
+
+1. **City Names:**
+   - Use Devanagari script for Indian city names
+   - Maintain Latin script for non-Indian city names
+
+2. **Personal Names:**
+   - Use Devanagari script for Indian personal names
+   - Maintain original script for non-Indian names
+
+**Examples:**
+```
+✅ Correct: I live in मुंबई near अंधेरी station
+❌ Incorrect: I live in Mumbai near Andheri station
+
+✅ Correct: Hello! अमित and रोहित are my friends from New York
+❌ Incorrect: Hello! Amit and Rohit are my friends from New York
+
+✅ Correct: Hello! मैं दिल्ली में रहता हूं। My name is John and my friend's name is श्याम।
+❌ Incorrect: Hello! Mai Delhi me rehta hun. My name is John and my friend's name is Shyam.
+```
+
+## Text Chunking
+
+### Character Limit Guidelines
+
+To optimize real-time processing and reduce latency, implement these chunking practices:
+
+1. **Size Constraints:**
+   - Maximum chunk size: 250 characters
+   - Break at natural punctuation points
+   - Maintain sentence coherence when possible
+
+2. **Breaking Points Priority:**
+   - First priority: Sentence-ending punctuation (., !, ?)
+   - Second priority: Other punctuation (;, :)
+   - Third priority: Natural word breaks
+
+### Chunking Implementation
+
+Use the following Python code for implementing text chunking:
+- For `lightning-large` model, set `max_chunk_size=140`.
+- For `lightning` model, set `max_chunk_size=250`. 
+
+<CodeGroup>
+```python python
+def chunk_text(text, max_chunk_size=250):
+    """
+    Chunks text with a maximum size of 250 characters, preferring to break at punctuation marks.
+
+    - For `lightning-large` model, set `max_chunk_size=140`.
+    - For `lightning` model, set `max_chunk_size=250`. 
+    
+    Args:
+        text (str): Input text to be chunked
+        max_chunk_size (int): Maximum size of each chunk (default: 250)
+        
+    Returns:
+        list: List of text chunks
+    """
+    chunks = []
+    while text:
+        if len(text) <= max_chunk_size:
+            chunks.append(text)
+            break
+            
+        # Look for punctuation within the last 50 characters of the max chunk size
+        chunk_end = max_chunk_size
+        punctuation_marks = '.,:;।!?'
+        
+        # Search backward from max_chunk_size for punctuation
+        found_punct = False
+        for i in range(chunk_end, max(chunk_end - 50, 0), -1):
+            if i < len(text) and text[i] in punctuation_marks:
+                chunk_end = i + 1  # Include the punctuation mark
+                found_punct = True
+                break
+        
+        # If no punctuation found, look for space
+        if not found_punct:
+            for i in range(chunk_end, max(chunk_end - 50, 0), -1):
+                if i < len(text) and text[i].isspace():
+                    chunk_end = i
+                    break
+            # If no space found, force break at max_chunk_size
+            if not found_punct and chunk_end == max_chunk_size:
+                chunk_end = max_chunk_size
+        
+        # Add chunk and remove it from original text
+        chunks.append(text[:chunk_end].strip())
+        text = text[chunk_end:].strip()
+    
+    return chunks
+```
+</CodeGroup>
+
+## Handling numbers
+
+
+### Order IDs and Large Numbers
+
+When handling order IDs or large numbers:
+- Send them as separate requests
+- Split the text around the number
+
+**Example:**
+```
+Original: "Your order id is 123456789012345"
+Split into:
+1. "Your order id is"
+2. "123456789012345"
+```
+
+### Phone Numbers
+
+#### Default Grouping
+- Numbers are automatically grouped in 3-4-3 format
+- Example: "9876543210" is read as "987-6543-210"
+
+#### Custom Formatting
+For specific reading patterns:
+- Format numbers explicitly in text
+- Write out the exact pronunciation desired
+
+**Example:**
+```
+✅ Correct: "double nine triple eight double seven double six" (for 9988877766)
+❌ Incorrect: "9988877766" (if you want it read as "double nine...")
+```
+
+## Date and Time Formatting Guidelines
+
+### Date Formats
+You may use any of the following formats when writing dates:
+
+1. DD/MM/YYYY → `12/02/2025` → "twelve, two, twenty twenty-five"
+2. DD-MM-YYYY → `12-02-2025` → "twelve, two, twenty twenty-five"
+3. DD Month YYYY → `12 February 2025` → "twelve February twenty twenty five"
+4. Month DD YYYY → `February 12th 2025` → "February, twelfth, twenty twenty-five"
+5. DD-MM-YY → `12-02-25` → "twelve, two, twenty-five"
+6. DD/MM/YY → `12/02/25` → "twelve, two, twenty-five"
+
+> Note: Ordinal suffixes (st, nd, rd, th) could be used in dates.
+
+```
+✅ My birthday is on 31/12/2002.  
+✅ The event is scheduled for 05th March 2024.  
+✅ We will launch the project on June 15 2023.  
+✅ The deadline is 30-06-24.  
+
+❌ 21st of June, 2003. (Will be read as twenty-first of June, two thousand and three)  
+❌ 12.02.2025. (Will be read as twelve two two thousand and twenty-five)  
+```
+
+### Time Formats
+You may use the following formats when specifying time:
+
+1. HH:MM:SS → `14:30:15` → "fourteen thirty fifteen"
+2. HH:MM → `14:30` → "fourteen thirty"
+
+```
+✅ Let's meet at 12:32 PM on 12/02/2025.  
+✅ The meeting starts at 09:45 AM.  
+✅ The match will begin at 18:00.  
+✅ The alarm is set for 07:15:30.  
+
+❌ 14.30 (Will be read as fourteen [long pause] thirty)  
+❌ 7'5 AM (Will be read as seven five) 
+```
+
+## Mathematical Expressions
+
+Express mathematical operations in words for clarity. For complex mathematical expressions, break down into simpler components:
+
+```
+✅ Correct: two plus three equals five
+✅ Correct: 2 plus 3 equals 5
+❌ Incorrect: 2+3=5
+
+✅ Correct: ten minus three equals seven
+✅ Correct: 10 minus 3 equals 7
+❌ Incorrect: 10-3=7
+
+✅ Correct: five multiplied by three equals fifteen
+✅ Correct: 5 multiplied by 3 equals 15
+❌ Incorrect: 5x3=15, 5*3=15
+
+✅ Correct: ten divided by two equals five
+✅ Correct: 10 divided by 2 equals 5
+❌ Incorrect: 10/2=5, 10÷5=2
+
+✅ Correct: open parentheses five plus three close parentheses multiplied by two equals sixteen
+✅ Correct: open parentheses 5 plus 3 close parentheses multiplied by 2 equals 16
+❌ Incorrect: (5+3)*2=16
+
+✅ Correct: square root of sixteen equals four
+✅ Correct: square root of 16 equals 4
+❌ Incorrect: √16=4
+```
+
+## Approximate Values
+
+When expressing approximate values:
+- Write out the full words
+- Avoid using symbols for approximation
+- Be explicit about the approximation
+
+**Examples:**
+```
+✅ Correct: Your delivery will arrive in approximately twenty minutes
+✅ Correct: Your delivery will arrive in approximately 20 minutes
+❌ Incorrect: Your delivery will arrive in ~20 mins
+
+✅ Correct: around five hundred people attended
+✅ Correct: around 500 people attended
+❌ Incorrect: ~500 people attended
+```
+
+## Units and Measurements
+
+
+When expressing measurements, write out the units in full words to ensure clear understanding:
+
+```
+✅ Correct: five kilometers, 5 kilometers
+❌ Incorrect: 5km, 5 kms
+
+✅ Correct: twenty kilograms of rice, 20 kilograms of rice
+❌ Incorrect: 20kg rice, 20kgs rice
+
+✅ Correct: thirty degrees Celsius, 30 degrees Celsius
+❌ Incorrect: 30°C, 30 C
+
+✅ Correct: two liters of water, 2 liters of water
+❌ Incorrect: 2L water, 2l water
+
+✅ Correct: five feet six inches tall, 5 feet 6 inches tall
+❌ Incorrect: 5'6" tall, 5ft 6in tall
+```
+
+## Symbols and Special Characters
+
+### Basic Symbols
+Spell out special characters and symbols in all contexts:
+```
+. → "dot"
+@ → "at"
+_ → "underscore"
+- → "dash"
+/ → "forward slash"
+# → "hashtag"
+& → "and"
+```
+
+### Digital Content Formatting
+
+**1. URLs:**
+```
+✅ Correct: visit docs dot example dot com forward slash guide
+❌ Incorrect: visit docs.example.com/guide
+
+✅ Correct: my dash website dot com forward slash about
+❌ Incorrect: my-website.com/about
+```
+
+**2. Email Addresses:**
+```
+✅ Correct: support dot company at gmail dot com
+❌ Incorrect: support.company@gmail.com
+
+✅ Correct: info underscore help at company dot com
+❌ Incorrect: info_help@company.com
+```
+
+**3. Social Media:**
+```
+✅ Correct: at company underscore name
+❌ Incorrect: @company_name
+
+✅ Correct: hashtag trending now
+❌ Incorrect: #TrendingNow
+
+✅ Correct: follow us at tech underscore company hashtag latest news
+❌ Incorrect: follow us @tech_company #LatestNews
+```
+
+### Range and Interval Notation
+Always write out ranges and relationships explicitly to avoid ambiguity:
+```
+✅ Correct: five to eight days
+❌ Incorrect: 5-8 days
+
+✅ Correct: between ten and fifteen minutes
+❌ Incorrect: 10-15 minutes
+
+✅ Correct: temperatures from twenty to thirty degrees
+❌ Incorrect: temperatures 20-30°
+```
+
+Note:
+- Consistency is key - use the same format throughout your content
+- When in doubt, write out the full words
+- For complex URLs or handles, break them into smaller, manageable chunks
+- Avoid using symbols that could have multiple interpretations

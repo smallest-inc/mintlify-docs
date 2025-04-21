@@ -1,0 +1,24 @@
+---
+title: 'Text to Speech'
+sidebarTitle: 'Text to Speech (SSE)'
+description: 'Stream speech for given text using the Lightning-Large SSE API'
+openapi: 'POST /api/v1/lightning-large/stream'
+---
+
+## Overview
+
+The Lightning-Large SSE API provides real-time text-to-speech streaming capabilities with high-quality voice synthesis. This API uses Server-Sent Events (SSE) to deliver audio chunks as they're generated, enabling low-latency audio playback without waiting for the entire audio file to process.
+
+## When to Use
+
+- **Interactive Applications**: Perfect for chatbots, virtual assistants, and other applications requiring immediate voice responses
+- **Long-Form Content**: Efficiently stream audio for articles, stories, or other long-form content without buffering delays
+- **Voice User Interfaces**: Create natural-sounding voice interfaces with minimal perceived latency
+- **Accessibility Solutions**: Provide real-time audio versions of written content for users with visual impairments
+
+## How It Works
+
+1. **Make a POST Request**: Send your text and voice settings to the API endpoint
+2. **Receive Audio Chunks**: The API processes your text and streams audio back as base64-encoded chunks with 1024 byte size
+3. **Process the Stream**: Handle the SSE events to decode and play audio chunks sequentially
+4. **End of Stream**: The API sends a completion event when all audio has been delivered

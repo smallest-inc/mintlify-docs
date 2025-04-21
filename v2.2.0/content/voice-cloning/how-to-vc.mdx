@@ -1,0 +1,88 @@
+---
+title: "How to create an Instant Voice Clone using Python SDK"
+icon: "compact-disc"
+---
+
+In this tutorial, you will learn how to use the Smallest AI platform to create a voice by uploading an audio file. By the end of this tutorial, you will be able to clone your voice using our API.
+
+You can access the source code for the Python SDK on our [GitHub repository](https://github.com/smallest-inc/smallest-python-sdk).
+
+## Requirements
+
+Before you begin, ensure you have the following:
+
+- Python (3.9 or higher) installed on your machine.
+- An API key from the Smallest AI platform (sign up [here](https://waves.smallest.ai)).
+
+## Setup
+
+### Install our SDK
+```bash
+pip install smallestai
+```
+
+Set your API key as an environment variable. 
+```bash
+export SMALLEST_API_KEY=YOUR_API_KEY
+``` 
+
+## Add your Voice  
+The Smallest AI SDK allows you to clone your voice by uploading an audio file. This feature is available both synchronously and asynchronously, making it flexible for different use cases. Below are examples of how to use this functionality.  
+
+### Synchronously  
+
+<CodeGroup> 
+```python python 
+from smallest import Smallest
+
+def main(): 
+    client = Smallest(api_key="YOUR_API_KEY")
+    res = client.add_voice(display_name="My Voice", file_path="my_voice.wav")
+    print(res)
+
+if __name__ == "__main__": 
+    main()
+```
+</CodeGroup>   
+
+### Asynchronously
+<CodeGroup>
+```python python
+import asyncio
+from smallest import AsyncSmallest
+
+async def main():
+    client = AsyncSmallest(api_key="YOUR_API_KEY")
+    res = await client.add_voice(display_name="My Voice", file_path="my_voice.wav")
+    print(res)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+</CodeGroup>  
+
+## Parameters    
+
+- `api_key`: Your API key (can be set via SMALLEST_API_KEY environment variable).
+- `display_name`: Name of the voice to be created.
+- `file_path`: Path to the audio file to be cloned.  
+
+These parameters are part of the add_voice function. They can be set when calling the function as shown above.  
+
+## Get All Cloned Voices  
+
+Once you have cloned your voices, you can retrieve a list of all cloned voices associated with your account using the following code:  
+<CodeGroup>
+```python python
+from smallest import Smallest
+
+client = Smallest(api_key="YOUR_API_KEY")
+print(f"Available Voices: {client.get_cloned_voices()}")
+```
+</CodeGroup> 
+
+
+If you have any questions or run into any issues, our community is here to help!   
+
+- Join our [Discord server](https://discord.gg/ywShEyXHBW) to connect with other developers and get real-time support.  
+- Reach out to our team via email: [support@smallest.ai](mailto:support@smallest.ai).

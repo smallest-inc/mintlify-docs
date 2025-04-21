@@ -1,0 +1,74 @@
+---
+title: WebSocket Support for TTS API
+sidebarTitle: WebSocket
+description: Learn about WebSocket support for our Text-to-Speech (TTS) API, how it works, and when to use it.
+---
+
+# WebSocket Support for TTS API
+
+Our Text-to-Speech (TTS) API supports WebSocket communication, providing a real-time, low-latency streaming experience for applications that require instant speech synthesis. WebSockets allow continuous data exchange, making them ideal for use cases that demand uninterrupted audio generation.
+
+## When to Use WebSockets
+
+### 1. **Real-Time Streaming**
+
+WebSockets are perfect for applications that need real-time speech synthesis, eliminating the delays associated with traditional HTTP requests.
+
+### 2. **Interactive Applications**
+
+For voice assistants, chatbots, and live transcription services, WebSockets ensure smooth, uninterrupted audio playback and response times.
+
+### 3. **Reduced Latency**
+
+A persistent WebSocket connection reduces the need for repeated request-response cycles, significantly improving performance for applications requiring rapid audio generation.
+
+## How It Works
+
+1. **Establish a Connection**: The client opens a WebSocket connection to our TTS API.
+2. **Send Text Data**: The client sends the text payload to be synthesized.
+3. **Process in Chunks**: The API breaks the text into chunks and processes them individually.
+4. **Receive Audio Stream**: As each chunk is processed, it is sent back to the client as a base64-encoded audio buffer.
+5. **Completion**: Once all chunks are processed, a success message is sent to indicate the end of the stream.
+
+## Implementation Details
+
+The WebSocket TTS API is optimized to handle real-time text-to-speech conversions efficiently. Here are some key implementation aspects:
+
+- **Input Validation**: Ensures the provided text and voice ID are valid before processing.
+- **Chunk Processing**: Long texts are split into smaller chunks (e.g., 240 characters) to optimize processing.
+- **Voice Caching**: The API fetches and caches voice configurations to reduce redundant database queries.
+- **Task Queue System**: Tasks are pushed to a Redis-based queue for efficient processing and real-time audio generation.
+- **Error Handling**: If any chunk fails, an error message is logged and sent to the client.
+
+## Example Request Flow
+
+1. The client sends a WebSocket message:
+   ```json
+   {
+     "text": "Hello, world!",
+     "voice_id": "12345",
+     "speed": 1.0,
+     "sample_rate": 24000
+   }
+   ```
+2. The API validates the request and retrieves the voice settings.
+3. The text is split into chunks and processed in the background.
+4. The client receives responses like:
+   ```json
+   {
+     "status": "chunk",
+     "data": {
+       "audio": "<base64_encoded_audio_chunk>"
+     }
+   }
+   ```
+5. Once all chunks are sent, a final message is sent:
+   ```json
+   {
+     "status": "success",
+     "message": "All chunks sent",
+     "done": true
+   }
+   ```
+
+For implementation details, check our [WebSocket API documentation](/v2.2.0/content/api-references/lightning-large-ws).
