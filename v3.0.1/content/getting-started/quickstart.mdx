@@ -20,7 +20,10 @@ pip install smallestai
 When using an SDK in your application, make sure to pin to at least the major version (e.g., ==1.*). This helps ensure your application remains stable and avoids potential issues from breaking changes in future updates.  
 
 ## Step 3: Make Your First API Call
-Here is a basic example of how to use the Python SDK to convert text to speech:  
+Here is a basic example of how to use the Python SDK to convert text to speech:    
+<Note>
+If you are using a `voice_id` corresponding to a voice clone, you should explicitly set the `model` parameter to `"lightning-large"` in the `Smallest` client or payload.
+</Note>
 
 <CodeGroup>
 ```python python
