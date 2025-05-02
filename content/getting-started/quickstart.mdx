@@ -21,7 +21,9 @@ When using an SDK in your application, make sure to pin to at least the major ve
 
 ## Step 3: Make Your First API Call
 Here is a basic example of how to use the Python SDK to convert text to speech:  
-
+<Note>
+If you are using a `voice_id` corresponding to a voice clone, you should explicitly set the `model` parameter to `"lightning-large"` in the `Smallest` client or payload.
+</Note>
 <CodeGroup>
 ```python python
 from smallest import Smallest

@@ -29,7 +29,10 @@ export SMALLEST_API_KEY=YOUR_API_KEY
 
 ## Synchronous Text to Speech
 
-Here is an example of how to synthesize text to speech synchronously:
+Here is an example of how to synthesize text to speech synchronously:  
+<Note>
+If you are using a `voice_id` corresponding to a voice clone, you should explicitly set the `model` parameter to `"lightning-large"` in the `Smallest` client or payload.
+</Note>
 <CodeGroup>
 ```python python
 from smallest import Smallest
@@ -48,7 +51,10 @@ if __name__ == "__main__":
 
 ## Asynchronous Text to Speech
 
-Here is an example of how to synthesize text to speech asynchronously:
+Here is an example of how to synthesize text to speech asynchronously:  
+<Note>
+If you are using a `voice_id` corresponding to a voice clone, you should explicitly set the `model` parameter to `"lightning-large"` in the `Smallest` client or payload.
+</Note>
 <CodeGroup>
 ```python python
 import asyncio
@@ -70,7 +76,7 @@ if __name__ == "__main__":
 ## Parameters   
 
 - `api_key` (str): Your API key (can be set via SMALLEST_API_KEY environment variable)
-- `model` (str): TTS model to use (default: "lightning")
+- `model` (str): TTS model to use (default: `lightning`, available: `lightning`, `lightning-large`)
 - `sample_rate` (int): Audio sample rate (default: 24000)
 - `voice_id` (str): Voice ID (default: "emily")
 - `speed` (float): Speech speed multiplier (default: 1.0)

@@ -26,7 +26,10 @@ export SMALLEST_API_KEY=YOUR_API_KEY
 
 ## Fetch Available Voices, Models, and Languages
 
-The Smallest AI SDK allows you to query the available languages, voices, and models for your TTS needs. Here's how you can do it:  
+The Smallest AI SDK allows you to query the available languages, voices, and models for your TTS needs. Here's how you can do it:   
+<Note>
+If you are using a `voice_id` corresponding to a voice clone, you should explicitly set the `model` parameter to `"lightning-large"` in the `Smallest` client or payload.
+</Note>
 
 <CodeGroup>
 ```python python
