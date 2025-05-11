@@ -8,7 +8,10 @@ icon: "cube"
   <Card title="Lightning" icon="square-1">
     Our fastest model, optimized for low-latency applications. It can generate 10 seconds of audio in just 100 milliseconds, making it ideal for real-time applications such as voicebots and interactive systems.
   </Card>
-  <Card title="Lightning Large" icon="square-2">
+  <Card title="Lightning v2" icon="square-2">
+      An upgrade from the Lightning Large model, offering improved performance and quality. It supports 16 languages, making it suitable for a wider range of applications requiring expressive and high-quality speech synthesis.
+  </Card>
+  <Card title="Lightning Large [⚠️ To be Deprecated]" icon="square-3">
     Offers more emotional depth and expressiveness compared to the Lightning model. It supports voice cloning and has a latency of just under 300 milliseconds, making it suitable for applications requiring high-quality, expressive speech.
   </Card>
 </CardGroup>
@@ -18,14 +21,14 @@ icon: "cube"
 
 | Model ID              | Description                                                                 | Languages Supported |
 |-----------------------|-----------------------------------------------------------------------------|---------------------|
-| **lightning**         | Fastest model with an RTF of 0.01, generating 10 seconds of audio in 100 ms. | English, Hindi             |
-| **lightning-large**   | More emotional depth and expressiveness, supports voice cloning, latency under 300 ms. | English, Hindi, Tamil, German, French, Polish             |
-| **lightning-multilingual** | Supports 30 languages, currently in beta.                                 | 30 languages        |  
+| **lightning**         | Fastest model with an RTF of 0.01, generating 10 seconds of audio in 100 ms. | `English` <br/> `Hindi`           |
+| **lightning-large**   | More emotional depth and expressiveness, supports voice cloning, latency under 300 ms. | `English`  <br/> `Hindi` <br/> `Tamil` <br/> `German` <br/> `French` <br/> `Polish`            |
+| **lightning-v2** | Supports 16 languages, currently in beta.                                 | `English` <br/> `Hindi` <br/> `Tamil` <br/> `Kannada` <br/> `Gujarati` <br/> `Bengali` <br/> `Marathi` <br/> `German` <br/> `French` <br/> `Spanish` <br/> `Italian` <br/> `Polish` <br/> `Dutch` <br/> `Russian` <br/> `Arabic` <br/> `Hebrew`      |
+
 
 <Note>
 Note: The API uses [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) (2-letter codes) to specify supported languages.
 </Note>
-
 
 ## Pricing
 

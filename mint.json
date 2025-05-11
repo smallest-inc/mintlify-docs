@@ -211,7 +211,7 @@
       "pages": ["/v3.0.1/content/api-references/lightning"]
     },
     {
-      "group": "Lightning Large",
+      "group": "Lightning Large [⚠️ To be Deprecated]",
       "version": "v2.2.0",
       "pages": [
         "/v2.2.0/content/api-references/lightning-large",
@@ -219,11 +219,25 @@
       ]
     },
     {
-      "group": "Lightning Large",
+      "group": "Lightning Large [⚠️ To be Deprecated]",
       "version": "v3.0.1",
       "pages": [
         "/v3.0.1/content/api-references/lightning-large",
         "/v3.0.1/content/api-references/lightning-large-stream"
+      ]
+    },
+    {
+      "group": "Lightning v2",
+      "version": "v2.2.0",
+      "pages": [
+        "/v2.2.0/content/api-references/lightning-v2-ws"
+      ]
+    },
+    {
+      "group": "Lightning v2",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/api-references/lightning-v2-ws"
       ]
     },
     {

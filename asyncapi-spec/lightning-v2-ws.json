@@ -1,0 +1,235 @@
+{
+    "asyncapi": "3.0.0",
+    "info": {
+      "title": "Waves Text-to-Speech API",
+      "version": "1.0.0",
+      "description": "WebSocket-based streaming text-to-speech API for generating realistic voices",
+      "contact": {
+        "name": "Waves API Support",
+        "url": "https://waves-api.smallest.ai/support",
+        "email": "support@smallest.ai"
+      },
+      "license": {
+        "name": "Proprietary"
+      }
+    },
+    "servers": {
+      "production": {
+        "host": "waves-api.smallest.ai",
+        "pathname": "/api/v1/lightning-v2/get_speech/stream",
+        "protocol": "wss",
+        "description": "Production WebSocket API endpoint",
+        "security": [
+          {
+            "$ref": "#/components/securitySchemes/bearerAuth"
+          }
+        ]
+      }
+    },
+    "channels": {
+      "/api/v1/lightning-v2/get_speech/stream": {
+        "address": "/api/v1/lightning-v2/get_speech/stream",
+        "messages": {
+          "ttsRequest.message": {
+            "name": "TTSRequest",
+            "contentType": "application/json",
+            "payload": {
+              "type": "object",
+              "required": [
+                "voice_id",
+                "text"
+              ],
+              "properties": {
+                "voice_id": {
+                  "type": "string",
+                  "description": "The ID of the voice to use"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The text to convert to speech"
+                },
+                "language": {
+                  "type": "string",
+                  "description": "The language code (e.g., 'en')",
+                  "default": "en"
+                },
+                "sample_rate": {
+                  "type": "integer",
+                  "description": "Audio sample rate in Hz",
+                  "default": 24000
+                },
+                "speed": {
+                  "type": "number",
+                  "description": "Speaking speed multiplier",
+                  "minimum": 0.1,
+                  "maximum": 5,
+                  "default": 1
+                },
+                "consistency": {
+                  "type": "number",
+                  "description": "Voice consistency parameter",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "default": 0.5
+                },
+                "enhancement": {
+                  "type": "integer",
+                  "description": "Audio enhancement level",
+                  "minimum": 0,
+                  "maximum": 2,
+                  "default": 1
+                },
+                "similarity": {
+                  "type": "number",
+                  "description": "Voice similarity parameter",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "default": 0
+                }
+              }
+            }
+          },
+          "ttsResponse.message": {
+            "name": "TTSResponse",
+            "contentType": "application/json",
+            "payload": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "processing",
+                    "complete",
+                    "error"
+                  ],
+                  "description": "Status of the TTS request"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "audio": {
+                      "type": "string",
+                      "description": "Base64-encoded audio chunk"
+                    }
+                  }
+                },
+                "payload": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "processing",
+                        "complete",
+                        "error"
+                      ],
+                      "description": "Alternative status field location"
+                    }
+                  }
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message in case of failure"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Error code"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "operations": {
+      "ttsRequest": {
+        "action": "receive",
+        "channel": {
+          "$ref": "#/channels/~1api~1v1~1lightning-v2~1get_speech~1stream"
+        },
+        "summary": "Send text-to-speech request",
+        "messages": [
+          {
+            "$ref": "#/channels/~1api~1v1~1lightning-v2~1get_speech~1stream/messages/ttsRequest.message"
+          }
+        ]
+      },
+      "ttsResponse": {
+        "action": "send",
+        "channel": {
+          "$ref": "#/channels/~1api~1v1~1lightning-v2~1get_speech~1stream"
+        },
+        "summary": "Receive audio stream chunks",
+        "messages": [
+          {
+            "$ref": "#/channels/~1api~1v1~1lightning-v2~1get_speech~1stream/messages/ttsResponse.message"
+          }
+        ]
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "description": "Bearer token authentication"
+        }
+      },
+      "schemas": {
+        "AudioChunk": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "audio": {
+                  "type": "string",
+                  "description": "Base64-encoded audio chunk"
+                }
+              }
+            }
+          }
+        },
+        "CompletionStatus": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "complete"
+              ],
+              "description": "Indicates that the streaming is complete"
+            }
+          }
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "error"
+              ]
+            },
+            "error": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
