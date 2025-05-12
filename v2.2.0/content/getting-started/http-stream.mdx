@@ -1,0 +1,70 @@
+---
+title: "HTTP vs HTTP Streaming vs Websockets"
+description: "What should you use?"
+icon: "handshake-angle"
+---
+
+--- 
+
+### Choosing the Right Protocol for Your TTS Application: HTTP, HTTP Streaming, or WebSocket?
+
+If you’re integrating Waves TTS into your application, one important decision is how to connect to the TTS engine. We support three protocols: HTTP, HTTP Streaming, and WebSocket, each tailored to different use cases. In this post, we’ll break down the strengths of each and help you choose the best fit for your needs.   
+
+## HTTP: Best for Simplicity and Short Requests  
+**What it is**:  
+A classic REST-style interaction. You send a complete request (e.g., the full text to be converted to speech), and receive the synthesized audio as a downloadable response.
+
+**When to use it**:
+- You have short or moderate-length texts.
+- You want a simple integration, such as from a browser, mobile app, or backend job.
+- You don’t need real-time feedback or streaming audio.
+
+**Pros and Cons**:
+
+| Pros                                          | Cons                                                  |
+|-----------------------------------------------|--------------------------------------------------------|
+| Simple to integrate with standard HTTP tools  | Full audio is returned only after complete synthesis  |
+| Easy to debug and monitor                     | Not suitable for real-time or long-form audio         |
+| Stateless; good for serverless environments   | Reconnect needed for each request                    |
+| Works well with caching and CDNs              | Higher latency compared to streaming methods          |
+
+
+## HTTP Streaming: Best for Faster Playback Without Complexity
+
+**What it is**:  
+An enhancement of standard HTTP. The client sends a complete request, but the server streams back the audio as it's being generated, no need to wait for the full file.
+
+**When to use it**:
+- You want faster playback with lower perceived latency.
+- You send full input text but need audio to start as soon as possible.
+- You want low-latency audio delivery without handling connection persistence.
+
+**Pros and Cons**:
+
+| Pros                                           | Cons                                                  |
+|------------------------------------------------|--------------------------------------------------------|
+| Lower latency than regular HTTP                | Only one-way communication (client → server)          |
+| Compatible with standard HTTP infrastructure   | Full input must still be sent before synthesis starts |
+| Audio starts playing as it's generated         | No partial or live input updates                      |
+| Easy to adopt with minimal changes             | Slightly more complex than basic HTTP                 |  
+
+
+## WebSocket: Best for Real-Time, Interactive Applications
+
+**What it is**:  
+A full-duplex, persistent connection that allows two-way communication between the client and server. You can send text dynamically and receive streaming audio back continuously.
+
+**When to use it**:
+- You need real-time, interactive TTS responses.
+- Input is dynamic or arrives in chunks (e.g., live typing, conversation).
+- You want persistent connections with minimal overhead per message.
+
+**Pros and Cons**:
+
+| Pros                                               | Cons                                                   |
+|----------------------------------------------------|---------------------------------------------------------|
+| Ultra low latency                                  | More complex to implement and manage                   |
+| Supports real-time, chunked input and responses    | Requires persistent connection management              |
+| Bi-directional communication                       | Not ideal for simple or infrequent tasks               |
+| Great for chatbots, live agents, or dictation apps | May require additional libraries or WebSocket support  |
+
