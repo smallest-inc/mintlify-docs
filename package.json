@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "ws": "^8.17.1"
+  },
+  "devDependencies": {
+    "mintlify": "^4.0.525"
   }
 }

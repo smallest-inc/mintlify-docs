@@ -92,7 +92,8 @@
       "pages": [
         "/v2.2.0/content/getting-started/quickstart",
         "/v2.2.0/content/getting-started/models",
-        "/v2.2.0/content/getting-started/authentication"
+        "/v2.2.0/content/getting-started/authentication",
+        "/v2.2.0/content/getting-started/http-stream"
       ]
     },
     {
@@ -101,7 +102,8 @@
       "pages": [
         "/v3.0.1/content/getting-started/quickstart",
         "/v3.0.1/content/getting-started/models",
-        "/v3.0.1/content/getting-started/authentication"
+        "/v3.0.1/content/getting-started/authentication",
+        "/v2.2.0/content/getting-started/http-stream"
       ]
     },
     {
@@ -211,7 +213,7 @@
       "pages": ["/v3.0.1/content/api-references/lightning"]
     },
     {
-      "group": "Lightning Large",
+      "group": "Lightning Large [⚠️ To be Deprecated]",
       "version": "v2.2.0",
       "pages": [
         "/v2.2.0/content/api-references/lightning-large",
@@ -219,11 +221,29 @@
       ]
     },
     {
-      "group": "Lightning Large",
+      "group": "Lightning Large [⚠️ To be Deprecated]",
       "version": "v3.0.1",
       "pages": [
         "/v3.0.1/content/api-references/lightning-large",
         "/v3.0.1/content/api-references/lightning-large-stream"
+      ]
+    },
+    {
+      "group": "Lightning v2",
+      "version": "v2.2.0",
+      "pages": [
+        "/v2.2.0/content/api-references/lightning-v2",
+        "/v2.2.0/content/api-references/lightning-v2-stream",
+        "/v2.2.0/content/api-references/lightning-v2-ws"
+      ]
+    },
+    {
+      "group": "Lightning v2",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/api-references/lightning-v2",
+        "/v3.0.1/content/api-references/lightning-v2-stream",
+        "/v3.0.1/content/api-references/lightning-v2-ws"
       ]
     },
     {

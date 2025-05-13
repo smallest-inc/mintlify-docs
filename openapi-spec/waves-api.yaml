@@ -156,6 +156,79 @@ paths:
                 error: 'InternalServerError'
                 message: 'An unexpected error occurred.'
 
+  /api/v1/lightning-v2/get_speech:
+    post:
+      tags:
+        - Lightning v2
+      operationId: synthesizeLightningv2Speech
+      summary: Generate speech from text (Lightning v2)
+      description: Converts provided text to speech using the Lightning v2 model.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lightningv2Request'
+      responses:
+        '200':
+          description: Synthesized speech retrieved successfully.
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+                description: A PCM int16 WAV file at the specified sample rate.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InvalidRequest'
+                message: "The 'text' field is required."
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'Unauthorized'
+                message: 'Bearer token is missing or invalid.'
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InternalServerError'
+                message: 'An unexpected error occurred.'
+
   /api/v1/lightning-large/stream:
     post:
       tags:
@@ -171,6 +244,81 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LightningLargeRequest'
+      responses:
+        '200':
+          description: Synthesized speech retrieved successfully.
+          content:
+            text/event-stream:
+              example:
+                data: |
+                  event: chunk
+                  data: <WAV_DATA>
+                  done: false
+
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InvalidRequest'
+                message: "The 'text' field is required."
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'Unauthorized'
+                message: 'Bearer token is missing or invalid.'
+        '500':
+          description: Server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error type.
+                  message:
+                    type: string
+                    description: Error message.
+              example:
+                error: 'InternalServerError'
+                message: 'An unexpected error occurred.'
+
+  /api/v1/lightning-v2/stream:
+    post:
+      tags:
+        - Lightning v2
+      operationId: streamLightningv2Speech
+      summary: Generate speech from text (Lightning v2)
+      description: Converts provided text to speech using the Lightning v2 model.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lightningv2Request'
       responses:
         '200':
           description: Synthesized speech retrieved successfully.
@@ -274,6 +422,30 @@ components:
             - pl
 
     LightningLargeRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/LightningRequest'
+      properties:
+        consistency:
+          type: number
+          description: This parameter controls word repetition and skipping. Decrease it to prevent skipped words, and increase it to prevent repetition.
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.5
+        similarity:
+          type: number
+          description: This parameter controls the similarity between the generated speech and the reference audio. Increase it to make the speech more similar to the reference audio.
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.0
+        enhancement:
+          type: number
+          description: Enhances speech quality at the cost of increased latency.
+          minimum: 0
+          maximum: 2
+          default: 1
+
+    Lightningv2Request:
       type: object
       allOf:
         - $ref: '#/components/schemas/LightningRequest'
