@@ -184,6 +184,10 @@
       ]
     },
     {
+      "group": "Product",
+      "pages": ["/content/product/projects"]
+    },
+    {
       "group": "Best Practices",
       "version": "v3.0.1",
       "pages": [
