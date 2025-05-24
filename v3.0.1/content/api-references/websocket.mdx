@@ -5,9 +5,9 @@ description: Learn about WebSocket support for our Text-to-Speech (TTS) API, how
 icon: arrow-down-wide-short
 ---
 
-# WebSocket Support for TTS API
-
 Our Text-to-Speech (TTS) API supports WebSocket communication, providing a real-time, low-latency streaming experience for applications that require instant speech synthesis. WebSockets allow continuous data exchange, making them ideal for use cases that demand uninterrupted audio generation.
+
+---
 
 ## When to Use WebSockets
 
@@ -23,6 +23,8 @@ For voice assistants, chatbots, and live transcription services, WebSockets ensu
 
 A persistent WebSocket connection reduces the need for repeated request-response cycles, significantly improving performance for applications requiring rapid audio generation.
 
+---
+
 ## How It Works
 
 1. **Establish a Connection**: The client opens a WebSocket connection to our TTS API.
@@ -31,9 +33,30 @@ A persistent WebSocket connection reduces the need for repeated request-response
 4. **Receive Audio Stream**: As each chunk is processed, it is sent back to the client as a base64-encoded audio buffer.
 5. **Completion**: Once all chunks are processed, a success message is sent to indicate the end of the stream.
 
+---
+
+## Timeout Behavior
+
+By default, the WebSocket connection enforces a **20-second inactivity timeout**. This means that if the client does not send any data within 20 seconds, the server will automatically close the connection to free up resources.
+
+To support longer sessions for use cases where clients need more time (e.g., long pauses between messages), the timeout can be extended up to **60 seconds**.
+
+### To extend the timeout:
+
+You can include the `timeout` parameter in the WebSocket URL like so:
+
+```link
+wss://waves-api.smallest.ai/api/v1/lightning-v2/get_speech/stream?timeout=60
+```
+
+
+This sets the inactivity timeout to 60 seconds. Valid values range from **20 (default)** to **60 seconds**.
+
+---
+
 ## Implementation Details
 
-The WebSocket TTS API is optimized to handle real-time text-to-speech conversions efficiently. Here are some key implementation aspects:
+The WebSocket TTS API is optimized to handle real-time text-to-speech conversions efficiently. Key aspects include:
 
 - **Input Validation**: Ensures the provided text and voice ID are valid before processing.
 - **Chunk Processing**: Long texts are split into smaller chunks (e.g., 240 characters) to optimize processing.
@@ -41,9 +64,12 @@ The WebSocket TTS API is optimized to handle real-time text-to-speech conversion
 - **Task Queue System**: Tasks are pushed to a Redis-based queue for efficient processing and real-time audio generation.
 - **Error Handling**: If any chunk fails, an error message is logged and sent to the client.
 
+---
+
 ## Example Request Flow
 
 1. The client sends a WebSocket message:
+
    ```json
    {
      "text": "Hello, world!",
@@ -51,25 +77,28 @@ The WebSocket TTS API is optimized to handle real-time text-to-speech conversion
      "speed": 1.0,
      "sample_rate": 24000
    }
-   ```
-2. The API validates the request and retrieves the voice settings.
-3. The text is split into chunks and processed in the background.
-4. The client receives responses like:
-   ```json
-   {
-     "status": "chunk",
-     "data": {
-       "audio": "<base64_encoded_audio_chunk>"
-     }
-   }
-   ```
-5. Once all chunks are sent, a final message is sent:
-   ```json
-   {
-     "status": "success",
-     "message": "All chunks sent",
-     "done": true
-   }
-   ```
 
-For implementation details, check our [WebSocket API documentation](/v3.0.1/content/api-references/lightning-large-ws).
+2. The API validates the request and retrieves the voice settings.
+
+3. The text is split into chunks and processed in the background.
+
+4. The client receives responses like:
+```json
+{
+  "status": "chunk",
+  "data": {
+    "audio": "<base64_encoded_audio_chunk>"
+  }
+}
+```
+
+5. Once all chunks are sent, a final message is returned: 
+```json
+{
+  "status": "success",
+  "message": "All chunks sent",
+  "done": true
+}
+```
+
+For implementation details, check our [WebSocket API documentation](/v3.0.1/content/api-references/lightning-v2-ws). 
