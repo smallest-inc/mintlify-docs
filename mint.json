@@ -195,37 +195,17 @@
     {
       "group": "API References",
       "version": "v2.2.0",
-      "pages": ["/v2.2.0/content/api-references/authentication"]
+      "pages": [
+        "/v2.2.0/content/api-references/authentication",
+        "/v2.2.0/content/api-references/websocket"
+      ]
     },
     {
       "group": "API References",
       "version": "v3.0.1",
-      "pages": ["/v3.0.1/content/api-references/authentication"]
-    },
-    {
-      "group": "Lightning",
-      "version": "v2.2.0",
-      "pages": ["/v2.2.0/content/api-references/lightning"]
-    },
-    {
-      "group": "Lightning",
-      "version": "v3.0.1",
-      "pages": ["/v3.0.1/content/api-references/lightning"]
-    },
-    {
-      "group": "Lightning Large [⚠️ To be Deprecated]",
-      "version": "v2.2.0",
       "pages": [
-        "/v2.2.0/content/api-references/lightning-large",
-        "/v2.2.0/content/api-references/lightning-large-stream"
-      ]
-    },
-    {
-      "group": "Lightning Large [⚠️ To be Deprecated]",
-      "version": "v3.0.1",
-      "pages": [
-        "/v3.0.1/content/api-references/lightning-large",
-        "/v3.0.1/content/api-references/lightning-large-stream"
+        "/v3.0.1/content/api-references/authentication",
+        "/v3.0.1/content/api-references/websocket"
       ]
     },
     {
@@ -245,6 +225,32 @@
         "/v3.0.1/content/api-references/lightning-v2-stream",
         "/v3.0.1/content/api-references/lightning-v2-ws"
       ]
+    },
+    {
+      "group": "Lightning Large [⚠️ To be Deprecated]",
+      "version": "v2.2.0",
+      "pages": [
+        "/v2.2.0/content/api-references/lightning-large",
+        "/v2.2.0/content/api-references/lightning-large-stream"
+      ]
+    },
+    {
+      "group": "Lightning Large [⚠️ To be Deprecated]",
+      "version": "v3.0.1",
+      "pages": [
+        "/v3.0.1/content/api-references/lightning-large",
+        "/v3.0.1/content/api-references/lightning-large-stream"
+      ]
+    },
+    {
+      "group": "Lightning",
+      "version": "v2.2.0",
+      "pages": ["/v2.2.0/content/api-references/lightning"]
+    },
+    {
+      "group": "Lightning",
+      "version": "v3.0.1",
+      "pages": ["/v3.0.1/content/api-references/lightning"]
     },
     {
       "group": "Voices",

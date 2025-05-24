@@ -50,7 +50,7 @@
                 },
                 "language": {
                   "type": "string",
-                  "description": "The language code (e.g., 'en')",
+                  "description": "The language code, available options: `en`, `hi`, `mr`, `kn`, `ta`, `bn`, `gu`, `de`, `fr`, `es`, `it`, `pl`, `nl`, `ru`, `ar`, `he`",
                   "default": "en"
                 },
                 "sample_rate": {
