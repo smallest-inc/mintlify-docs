@@ -98,11 +98,10 @@
                 "status": {
                   "type": "string",
                   "enum": [
-                    "processing",
-                    "complete",
-                    "error"
+                    "chunk",
+                    "success"
                   ],
-                  "description": "Status of the TTS request"
+                  "description": "Status of the TTS request, `chunk` indicates incoming audio chunk, `success` indicates completion."
                 },
                 "data": {
                   "type": "object",
@@ -110,33 +109,6 @@
                     "audio": {
                       "type": "string",
                       "description": "Base64-encoded audio chunk"
-                    }
-                  }
-                },
-                "payload": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "enum": [
-                        "processing",
-                        "complete",
-                        "error"
-                      ],
-                      "description": "Alternative status field location"
-                    }
-                  }
-                },
-                "error": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message in case of failure"
-                    },
-                    "code": {
-                      "type": "string",
-                      "description": "Error code"
                     }
                   }
                 }
